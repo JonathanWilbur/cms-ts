@@ -6,8 +6,8 @@ module.exports = {
     ],
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: ".min.js",
-        library: "",
+        filename: "cms.min.js",
+        library: "cms",
         libraryTarget: "var",
     },
     // mode: "development",
