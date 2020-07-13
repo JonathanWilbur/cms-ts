@@ -10,6 +10,16 @@
 import * as asn1 from "asn1-ts";
 import * as __utils from "./__utils";
 
+import {
+    _decode_SubjectPublicKeyInfo,
+    _encode_SubjectPublicKeyInfo,
+} from "x500-ts/dist/node/AuthenticationFramework";
+export {
+    SubjectPublicKeyInfo,
+    _decode_SubjectPublicKeyInfo,
+    _encode_SubjectPublicKeyInfo,
+} from "x500-ts/dist/node/AuthenticationFramework";
+
 // TODO: ObjectClassAssignment: FIELD-ID
 
 export class FieldID {
@@ -49,15 +59,13 @@ export function _decode_FieldID(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "fieldType";
+                        sequence[0].name = "fieldType";
             sequence[1].name = "parameters";
             let fieldType!: asn1.OBJECT_IDENTIFIER;
             let parameters!: asn1.ASN1Element;
             fieldType = __utils._decodeObjectIdentifier(sequence[0]);
             parameters = __utils._decodeAny(sequence[1]);
-            // TODO: Validate values.
-            return new FieldID(fieldType, parameters);
+                        return new FieldID(fieldType, parameters);
         };
     }
     return _cached_decoder_for_FieldID(el);
@@ -161,15 +169,13 @@ export function _decode_ValidationParms(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "seed";
+                        sequence[0].name = "seed";
             sequence[1].name = "pGenCounter";
             let seed!: asn1.BIT_STRING;
             let pGenCounter!: asn1.INTEGER;
             seed = __utils._decodeBitString(sequence[0]);
             pGenCounter = __utils._decodeInteger(sequence[1]);
-            // TODO: Validate values.
-            return new ValidationParms(seed, pGenCounter);
+                        return new ValidationParms(seed, pGenCounter);
         };
     }
     return _cached_decoder_for_ValidationParms(el);
@@ -448,93 +454,6 @@ export function _encode_AlgorithmIdentifier(
         };
     }
     return _cached_encoder_for_AlgorithmIdentifier(value, elGetter);
-}
-
-export class SubjectPublicKeyInfo {
-    constructor(
-        readonly algorithm: AlgorithmIdentifier,
-        readonly subjectPublicKey: asn1.BIT_STRING
-    ) {}
-}
-export const _root_component_type_list_1_spec_for_SubjectPublicKeyInfo: __utils.ComponentSpec[] = [
-    new __utils.ComponentSpec(
-        "algorithm",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 16),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "subjectPublicKey",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 3),
-        undefined,
-        undefined
-    ),
-];
-export const _root_component_type_list_2_spec_for_SubjectPublicKeyInfo: __utils.ComponentSpec[] = [];
-export const _extension_additions_list_spec_for_SubjectPublicKeyInfo: __utils.ComponentSpec[] = [];
-let _cached_decoder_for_SubjectPublicKeyInfo: __utils.ASN1Decoder<
-    SubjectPublicKeyInfo
-> | null = null;
-let _cached_encoder_for_SubjectPublicKeyInfo: __utils.ASN1Encoder<
-    SubjectPublicKeyInfo
-> | null = null;
-export function _decode_SubjectPublicKeyInfo(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_SubjectPublicKeyInfo) {
-        _cached_decoder_for_SubjectPublicKeyInfo = function (
-            el: asn1.ASN1Element
-        ): SubjectPublicKeyInfo {
-            const sequence: asn1.ASN1Element[] = el.sequence;
-            if (sequence.length < 2) {
-                throw new asn1.ASN1ConstructionError(
-                    "SubjectPublicKeyInfo contained only " +
-                        sequence.length.toString() +
-                        " elements."
-                );
-            }
-            // TODO: Validate tags.
-            sequence[0].name = "algorithm";
-            sequence[1].name = "subjectPublicKey";
-            let algorithm!: AlgorithmIdentifier;
-            let subjectPublicKey!: asn1.BIT_STRING;
-            algorithm = _decode_AlgorithmIdentifier(sequence[0]);
-            subjectPublicKey = __utils._decodeBitString(sequence[1]);
-            // TODO: Validate values.
-            return new SubjectPublicKeyInfo(algorithm, subjectPublicKey);
-        };
-    }
-    return _cached_decoder_for_SubjectPublicKeyInfo(el);
-}
-export function _encode_SubjectPublicKeyInfo(
-    value: SubjectPublicKeyInfo,
-    elGetter: __utils.ASN1Encoder<SubjectPublicKeyInfo>
-) {
-    if (!_cached_encoder_for_SubjectPublicKeyInfo) {
-        _cached_encoder_for_SubjectPublicKeyInfo = function (
-            value: SubjectPublicKeyInfo,
-            elGetter: __utils.ASN1Encoder<SubjectPublicKeyInfo>
-        ): asn1.ASN1Element {
-            return __utils._encodeSequence(
-                ([] as (asn1.ASN1Element | undefined)[])
-                    .concat([
-                        /* REQUIRED   */ _encode_AlgorithmIdentifier(
-                            value.algorithm,
-                            __utils.BER
-                        ),
-                        /* REQUIRED   */ __utils._encodeBitString(
-                            value.subjectPublicKey,
-                            __utils.BER
-                        ),
-                    ])
-                    .filter(
-                        (c: asn1.ASN1Element | undefined): boolean => !!c
-                    ) as asn1.ASN1Element[],
-                __utils.BER
-            );
-        };
-    }
-    return _cached_encoder_for_SubjectPublicKeyInfo(value, elGetter);
 }
 
 // TODO: ObjectSetAssignment: DHPublicNumbers

@@ -11,38 +11,52 @@ import * as asn1 from "asn1-ts";
 import * as __utils from "./__utils";
 
 import {
-    AlgorithmIdentifier,
+    Attribute,
+    Name,
+    _decode_Attribute,
+    _encode_Attribute,
+    _decode_Name,
+    _encode_Name,
+} from "x500-ts/dist/node/InformationFramework";
+export {
+    Attribute,
+    Name,
+    _decode_Attribute,
+    _encode_Attribute,
+    _decode_Name,
+    _encode_Name,
+} from "x500-ts/dist/node/InformationFramework";
+
+import {
     _decode_ParamOptions,
     _encode_ParamOptions,
-    _decode_AlgorithmIdentifier,
-    _encode_AlgorithmIdentifier,
 } from "./AlgorithmInformation-2009";
 
 import {
+    AlgorithmIdentifier,
     Certificate,
     CertificateList,
     CertificateSerialNumber,
-    Name,
+    _decode_AlgorithmIdentifier,
+    _encode_AlgorithmIdentifier,
     _decode_Certificate,
     _encode_Certificate,
     _decode_CertificateList,
     _encode_CertificateList,
     _decode_CertificateSerialNumber,
     _encode_CertificateSerialNumber,
-    _decode_Name,
-    _encode_Name,
-} from "./PKIX1Explicit-2009";
+} from "x500-ts/dist/node/AuthenticationFramework";
 
 import {
     AttributeCertificate,
     _decode_AttributeCertificate,
     _encode_AttributeCertificate,
-} from "./PKIXAttributeCertificate-2009";
+} from "x500-ts/dist/node/AttributeCertificateDefinitions";
 export {
     AttributeCertificate,
     _decode_AttributeCertificate,
     _encode_AttributeCertificate,
-} from "./PKIXAttributeCertificate-2009";
+} from "x500-ts/dist/node/AttributeCertificateDefinitions";
 
 import {
     AttributeCertificateV1,
@@ -121,8 +135,7 @@ export function _decode_ContentInfo(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "contentType";
+                        sequence[0].name = "contentType";
             sequence[1].name = "content";
             let contentType!: asn1.OBJECT_IDENTIFIER;
             let content!: asn1.ASN1Element;
@@ -130,8 +143,7 @@ export function _decode_ContentInfo(el: asn1.ASN1Element) {
             content = __utils._decode_explicit<asn1.ASN1Element>(
                 () => __utils._decodeAny
             )(sequence[1]);
-            // TODO: Validate values.
-            return new ContentInfo(contentType, content);
+                        return new ContentInfo(contentType, content);
         };
     }
     return _cached_decoder_for_ContentInfo(el);
@@ -325,99 +337,6 @@ export function _encode_EncapsulatedContentInfo(
     return _cached_encoder_for_EncapsulatedContentInfo(value, elGetter);
 }
 
-export class Attribute {
-    constructor(
-        readonly attrType: asn1.ASN1Element /* COULD_NOT_RESOLVE_OBJECT_CLASS_DEF */,
-        readonly attrValues: asn1.ASN1Element /* COULD_NOT_RESOLVE_OBJECT_CLASS_DEF */[]
-    ) {}
-}
-export const _root_component_type_list_1_spec_for_Attribute: __utils.ComponentSpec[] = [
-    new __utils.ComponentSpec(
-        "attrType",
-        false,
-        __utils.hasAnyTag,
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "attrValues",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 17),
-        undefined,
-        undefined
-    ),
-];
-export const _root_component_type_list_2_spec_for_Attribute: __utils.ComponentSpec[] = [];
-export const _extension_additions_list_spec_for_Attribute: __utils.ComponentSpec[] = [];
-let _cached_decoder_for_Attribute: __utils.ASN1Decoder<Attribute> | null = null;
-let _cached_encoder_for_Attribute: __utils.ASN1Encoder<Attribute> | null = null;
-export function _decode_Attribute(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_Attribute) {
-        _cached_decoder_for_Attribute = function (
-            el: asn1.ASN1Element
-        ): Attribute {
-            const sequence: asn1.ASN1Element[] = el.sequence;
-            if (sequence.length < 2) {
-                throw new asn1.ASN1ConstructionError(
-                    "Attribute contained only " +
-                        sequence.length.toString() +
-                        " elements."
-                );
-            }
-            // TODO: Validate tags.
-            sequence[0].name = "attrType";
-            sequence[1].name = "attrValues";
-            let attrType!: asn1.ASN1Element /* COULD_NOT_RESOLVE_OBJECT_CLASS_DEF */;
-            let attrValues!: asn1.ASN1Element /* COULD_NOT_RESOLVE_OBJECT_CLASS_DEF */[];
-            attrType = __utils._decodeAny(
-                /* COULD_NOT_RESOLVE_OBJECT_CLASS_DEF */ sequence[0]
-            );
-            attrValues = __utils._decodeSetOf<
-                asn1.ASN1Element /* COULD_NOT_RESOLVE_OBJECT_CLASS_DEF */
-            >(
-                () =>
-                    __utils._decodeAny /* COULD_NOT_RESOLVE_OBJECT_CLASS_DEF */
-            )(sequence[1]);
-            // TODO: Validate values.
-            return new Attribute(attrType, attrValues);
-        };
-    }
-    return _cached_decoder_for_Attribute(el);
-}
-export function _encode_Attribute(
-    value: Attribute,
-    elGetter: __utils.ASN1Encoder<Attribute>
-) {
-    if (!_cached_encoder_for_Attribute) {
-        _cached_encoder_for_Attribute = function (
-            value: Attribute,
-            elGetter: __utils.ASN1Encoder<Attribute>
-        ): asn1.ASN1Element {
-            return __utils._encodeSequence(
-                ([] as (asn1.ASN1Element | undefined)[])
-                    .concat([
-                        /* REQUIRED   */ __utils._encodeAny(
-                            /* COULD_NOT_RESOLVE_OBJECT_CLASS_DEF */ value.attrType,
-                            __utils.BER
-                        ),
-                        /* REQUIRED   */ __utils._encodeSetOf<
-                            asn1.ASN1Element /* COULD_NOT_RESOLVE_OBJECT_CLASS_DEF */
-                        >(
-                            () =>
-                                __utils._encodeAny /* COULD_NOT_RESOLVE_OBJECT_CLASS_DEF */,
-                            __utils.BER
-                        )(value.attrValues, __utils.BER),
-                    ])
-                    .filter(
-                        (c: asn1.ASN1Element | undefined): boolean => !!c
-                    ) as asn1.ASN1Element[],
-                __utils.BER
-            );
-        };
-    }
-    return _cached_encoder_for_Attribute(value, elGetter);
-}
-
 export type UnauthAttributes = Attribute[]; // SetOfType
 let _cached_decoder_for_UnauthAttributes: __utils.ASN1Decoder<
     UnauthAttributes
@@ -497,8 +416,7 @@ export function _decode_ExtendedCertificateInfo(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "version";
+                        sequence[0].name = "version";
             sequence[1].name = "certificate";
             sequence[2].name = "attributes";
             let version!: CMSVersion;
@@ -507,8 +425,7 @@ export function _decode_ExtendedCertificateInfo(el: asn1.ASN1Element) {
             version = _decode_CMSVersion(sequence[0]);
             certificate = _decode_Certificate(sequence[1]);
             attributes = _decode_UnauthAttributes(sequence[2]);
-            // TODO: Validate values.
-            return new ExtendedCertificateInfo(
+                        return new ExtendedCertificateInfo(
                 version,
                 certificate,
                 attributes
@@ -645,8 +562,7 @@ export function _decode_ExtendedCertificate(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "extendedCertificateInfo";
+                        sequence[0].name = "extendedCertificateInfo";
             sequence[1].name = "signatureAlgorithm";
             sequence[2].name = "signature";
             let extendedCertificateInfo!: ExtendedCertificateInfo;
@@ -659,8 +575,7 @@ export function _decode_ExtendedCertificate(el: asn1.ASN1Element) {
                 sequence[1]
             );
             signature = _decode_Signature(sequence[2]);
-            // TODO: Validate values.
-            return new ExtendedCertificate(
+                        return new ExtendedCertificate(
                 extendedCertificateInfo,
                 signatureAlgorithm,
                 signature
@@ -770,15 +685,13 @@ export function _decode_OtherCertificateFormat(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "otherCertFormat";
+                        sequence[0].name = "otherCertFormat";
             sequence[1].name = "otherCert";
             let otherCertFormat!: asn1.OBJECT_IDENTIFIER;
             let otherCert!: asn1.ASN1Element;
             otherCertFormat = __utils._decodeObjectIdentifier(sequence[0]);
             otherCert = __utils._decodeAny(sequence[1]);
-            // TODO: Validate values.
-            return new OtherCertificateFormat(otherCertFormat, otherCert);
+                        return new OtherCertificateFormat(otherCertFormat, otherCert);
         };
     }
     return _cached_decoder_for_OtherCertificateFormat(el);
@@ -978,15 +891,13 @@ export function _decode_OtherRevocationInfoFormat(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "otherRevInfoFormat";
+                        sequence[0].name = "otherRevInfoFormat";
             sequence[1].name = "otherRevInfo";
             let otherRevInfoFormat!: asn1.OBJECT_IDENTIFIER;
             let otherRevInfo!: asn1.ASN1Element;
             otherRevInfoFormat = __utils._decodeObjectIdentifier(sequence[0]);
             otherRevInfo = __utils._decodeAny(sequence[1]);
-            // TODO: Validate values.
-            return new OtherRevocationInfoFormat(
+                        return new OtherRevocationInfoFormat(
                 otherRevInfoFormat,
                 otherRevInfo
             );
@@ -1146,15 +1057,13 @@ export function _decode_IssuerAndSerialNumber(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "issuer";
+                        sequence[0].name = "issuer";
             sequence[1].name = "serialNumber";
             let issuer!: Name;
             let serialNumber!: CertificateSerialNumber;
             issuer = _decode_Name(sequence[0]);
             serialNumber = _decode_CertificateSerialNumber(sequence[1]);
-            // TODO: Validate values.
-            return new IssuerAndSerialNumber(issuer, serialNumber);
+                        return new IssuerAndSerialNumber(issuer, serialNumber);
         };
     }
     return _cached_decoder_for_IssuerAndSerialNumber(el);
@@ -1992,8 +1901,7 @@ export function _decode_KeyTransRecipientInfo(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "version";
+                        sequence[0].name = "version";
             sequence[1].name = "rid";
             sequence[2].name = "keyEncryptionAlgorithm";
             sequence[3].name = "encryptedKey";
@@ -2005,8 +1913,7 @@ export function _decode_KeyTransRecipientInfo(el: asn1.ASN1Element) {
             rid = _decode_RecipientIdentifier(sequence[1]);
             keyEncryptionAlgorithm = _decode_AlgorithmIdentifier(sequence[2]);
             encryptedKey = _decode_EncryptedKey(sequence[3]);
-            // TODO: Validate values.
-            return new KeyTransRecipientInfo(
+                        return new KeyTransRecipientInfo(
                 version,
                 rid,
                 keyEncryptionAlgorithm,
@@ -2098,15 +2005,13 @@ export function _decode_OriginatorPublicKey(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "algorithm";
+                        sequence[0].name = "algorithm";
             sequence[1].name = "publicKey";
             let algorithm!: AlgorithmIdentifier;
             let publicKey!: asn1.BIT_STRING;
             algorithm = _decode_AlgorithmIdentifier(sequence[0]);
             publicKey = __utils._decodeBitString(sequence[1]);
-            // TODO: Validate values.
-            return new OriginatorPublicKey(algorithm, publicKey);
+                        return new OriginatorPublicKey(algorithm, publicKey);
         };
     }
     return _cached_decoder_for_OriginatorPublicKey(el);
@@ -2272,15 +2177,13 @@ export function _decode_OtherKeyAttribute(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "keyAttrId";
+                        sequence[0].name = "keyAttrId";
             sequence[1].name = "keyAttr";
             let keyAttrId!: asn1.OBJECT_IDENTIFIER;
             let keyAttr!: asn1.ASN1Element;
             keyAttrId = __utils._decodeObjectIdentifier(sequence[0]);
             keyAttr = __utils._decodeAny(sequence[1]);
-            // TODO: Validate values.
-            return new OtherKeyAttribute(keyAttrId, keyAttr);
+                        return new OtherKeyAttribute(keyAttrId, keyAttr);
         };
     }
     return _cached_decoder_for_OtherKeyAttribute(el);
@@ -2527,15 +2430,13 @@ export function _decode_RecipientEncryptedKey(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "rid";
+                        sequence[0].name = "rid";
             sequence[1].name = "encryptedKey";
             let rid!: KeyAgreeRecipientIdentifier;
             let encryptedKey!: EncryptedKey;
             rid = _decode_KeyAgreeRecipientIdentifier(sequence[0]);
             encryptedKey = _decode_EncryptedKey(sequence[1]);
-            // TODO: Validate values.
-            return new RecipientEncryptedKey(rid, encryptedKey);
+                        return new RecipientEncryptedKey(rid, encryptedKey);
         };
     }
     return _cached_decoder_for_RecipientEncryptedKey(el);
@@ -2959,8 +2860,7 @@ export function _decode_KEKRecipientInfo(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "version";
+                        sequence[0].name = "version";
             sequence[1].name = "kekid";
             sequence[2].name = "keyEncryptionAlgorithm";
             sequence[3].name = "encryptedKey";
@@ -2974,8 +2874,7 @@ export function _decode_KEKRecipientInfo(el: asn1.ASN1Element) {
                 sequence[2]
             );
             encryptedKey = _decode_EncryptedKey(sequence[3]);
-            // TODO: Validate values.
-            return new KEKRecipientInfo(
+                        return new KEKRecipientInfo(
                 version,
                 kekid,
                 keyEncryptionAlgorithm,
@@ -3235,15 +3134,13 @@ export function _decode_OtherRecipientInfo(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "oriType";
+                        sequence[0].name = "oriType";
             sequence[1].name = "oriValue";
             let oriType!: asn1.OBJECT_IDENTIFIER;
             let oriValue!: asn1.ASN1Element;
             oriType = __utils._decodeObjectIdentifier(sequence[0]);
             oriValue = __utils._decodeAny(sequence[1]);
-            // TODO: Validate values.
-            return new OtherRecipientInfo(oriType, oriValue);
+                        return new OtherRecipientInfo(oriType, oriValue);
         };
     }
     return _cached_decoder_for_OtherRecipientInfo(el);
@@ -3837,8 +3734,7 @@ export function _decode_DigestedData(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "version";
+                        sequence[0].name = "version";
             sequence[1].name = "digestAlgorithm";
             sequence[2].name = "encapContentInfo";
             sequence[3].name = "digest";
@@ -3850,8 +3746,7 @@ export function _decode_DigestedData(el: asn1.ASN1Element) {
             digestAlgorithm = _decode_DigestAlgorithmIdentifier(sequence[1]);
             encapContentInfo = _decode_EncapsulatedContentInfo(sequence[2]);
             digest = _decode_Digest(sequence[3]);
-            // TODO: Validate values.
-            return new DigestedData(
+                        return new DigestedData(
                 version,
                 digestAlgorithm,
                 encapContentInfo,

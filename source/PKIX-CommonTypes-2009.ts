@@ -57,8 +57,7 @@ export function _decode_AttributeSet(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "type";
+                        sequence[0].name = "type";
             sequence[1].name = "values";
             let type_!: asn1.OBJECT_IDENTIFIER;
             let values!: asn1.ASN1Element[];
@@ -66,8 +65,7 @@ export function _decode_AttributeSet(el: asn1.ASN1Element) {
             values = __utils._decodeSetOf<asn1.ASN1Element>(
                 () => __utils._decodeAny
             )(sequence[1]);
-            // TODO: Validate values.
-            return new AttributeSet(type_, values);
+                        return new AttributeSet(type_, values);
         };
     }
     return _cached_decoder_for_AttributeSet(el);
@@ -146,15 +144,13 @@ export function _decode_SingleAttribute(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "type";
+                        sequence[0].name = "type";
             sequence[1].name = "value";
             let type_!: asn1.OBJECT_IDENTIFIER;
             let value!: asn1.ASN1Element;
             type_ = __utils._decodeObjectIdentifier(sequence[0]);
             value = __utils._decodeAny(sequence[1]);
-            // TODO: Validate values.
-            return new SingleAttribute(type_, value);
+                        return new SingleAttribute(type_, value);
         };
     }
     return _cached_decoder_for_SingleAttribute(el);
@@ -384,8 +380,7 @@ export function _decode_SecurityCategory(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "type";
+                        sequence[0].name = "type";
             sequence[1].name = "value";
             let type_!: asn1.OBJECT_IDENTIFIER;
             let value!: asn1.ASN1Element;
@@ -395,8 +390,7 @@ export function _decode_SecurityCategory(el: asn1.ASN1Element) {
             value = __utils._decode_explicit<asn1.ASN1Element>(
                 () => __utils._decodeAny
             )(sequence[1]);
-            // TODO: Validate values.
-            return new SecurityCategory(type_, value);
+                        return new SecurityCategory(type_, value);
         };
     }
     return _cached_decoder_for_SecurityCategory(el);

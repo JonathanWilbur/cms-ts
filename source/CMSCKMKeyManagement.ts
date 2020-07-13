@@ -812,8 +812,7 @@ export function _decode_ConstructionAlgorithms(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "combiner";
+                        sequence[0].name = "combiner";
             sequence[1].name = "keyEncryptionAlgorithm";
             let combiner!: CombinerAlgorithmIdentifier;
             let keyEncryptionAlgorithm!: KeyEncryptionAlgorithmIdentifier;
@@ -821,8 +820,7 @@ export function _decode_ConstructionAlgorithms(el: asn1.ASN1Element) {
             keyEncryptionAlgorithm = _decode_KeyEncryptionAlgorithmIdentifier(
                 sequence[1]
             );
-            // TODO: Validate values.
-            return new ConstructionAlgorithms(combiner, keyEncryptionAlgorithm);
+                        return new ConstructionAlgorithms(combiner, keyEncryptionAlgorithm);
         };
     }
     return _cached_decoder_for_ConstructionAlgorithms(el);

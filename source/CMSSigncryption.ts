@@ -332,15 +332,13 @@ export function _decode_SigncrypterIDs(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "sender";
+                        sequence[0].name = "sender";
             sequence[1].name = "recipient";
             let sender!: KeyPairIdentifier;
             let recipient!: KeyPairIdentifier;
             sender = _decode_KeyPairIdentifier(sequence[0]);
             recipient = _decode_KeyPairIdentifier(sequence[1]);
-            // TODO: Validate values.
-            return new SigncrypterIDs(sender, recipient);
+                        return new SigncrypterIDs(sender, recipient);
         };
     }
     return _cached_decoder_for_SigncrypterIDs(el);
@@ -587,8 +585,7 @@ export function _decode_ToBeSigned(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "signcryptedPartsManifest";
+                        sequence[0].name = "signcryptedPartsManifest";
             sequence[1].name = "signedAttributes";
             let signcryptedPartsManifest!: SigncryptedPartsManifest;
             let signedAttributes!: SignedAttributes;
@@ -596,8 +593,7 @@ export function _decode_ToBeSigned(el: asn1.ASN1Element) {
                 sequence[0]
             );
             signedAttributes = _decode_SignedAttributes(sequence[1]);
-            // TODO: Validate values.
-            return new ToBeSigned(signcryptedPartsManifest, signedAttributes);
+                        return new ToBeSigned(signcryptedPartsManifest, signedAttributes);
         };
     }
     return _cached_decoder_for_ToBeSigned(el);
@@ -1361,15 +1357,13 @@ export function _decode_ToBeSigncrypted(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "content";
+                        sequence[0].name = "content";
             sequence[1].name = "attributes";
             let content!: Content;
             let attributes!: SigncryptedAttributes;
             content = _decode_Content(sequence[0]);
             attributes = _decode_SigncryptedAttributes(sequence[1]);
-            // TODO: Validate values.
-            return new ToBeSigncrypted(content, attributes);
+                        return new ToBeSigncrypted(content, attributes);
         };
     }
     return _cached_decoder_for_ToBeSigncrypted(el);

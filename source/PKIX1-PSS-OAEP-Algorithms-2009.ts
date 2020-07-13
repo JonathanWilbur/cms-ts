@@ -13,7 +13,7 @@ import {
     AlgorithmIdentifier,
     _decode_AlgorithmIdentifier,
     _encode_AlgorithmIdentifier,
-} from "./AlgorithmInformation-2009";
+} from "x500-ts/dist/node/AuthenticationFramework";
 
 import {
     id_sha1,

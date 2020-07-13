@@ -286,15 +286,13 @@ export function _decode_RC2CBCParameter(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "rc2ParameterVersion";
+                        sequence[0].name = "rc2ParameterVersion";
             sequence[1].name = "iv";
             let rc2ParameterVersion!: asn1.INTEGER;
             let iv!: asn1.OCTET_STRING;
             rc2ParameterVersion = __utils._decodeInteger(sequence[0]);
             iv = __utils._decodeOctetString(sequence[1]);
-            // TODO: Validate values.
-            return new RC2CBCParameter(rc2ParameterVersion, iv);
+                        return new RC2CBCParameter(rc2ParameterVersion, iv);
         };
     }
     return _cached_decoder_for_RC2CBCParameter(el);

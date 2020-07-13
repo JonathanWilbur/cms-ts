@@ -71,15 +71,13 @@ export function _decode_RSAPublicKey(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "modulus";
+                        sequence[0].name = "modulus";
             sequence[1].name = "publicExponent";
             let modulus!: asn1.INTEGER;
             let publicExponent!: asn1.INTEGER;
             modulus = __utils._decodeInteger(sequence[0]);
             publicExponent = __utils._decodeInteger(sequence[1]);
-            // TODO: Validate values.
-            return new RSAPublicKey(modulus, publicExponent);
+                        return new RSAPublicKey(modulus, publicExponent);
         };
     }
     return _cached_decoder_for_RSAPublicKey(el);
@@ -177,8 +175,7 @@ export function _decode_DSA_Params(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "p";
+                        sequence[0].name = "p";
             sequence[1].name = "q";
             sequence[2].name = "g";
             let p!: asn1.INTEGER;
@@ -187,8 +184,7 @@ export function _decode_DSA_Params(el: asn1.ASN1Element) {
             p = __utils._decodeInteger(sequence[0]);
             q = __utils._decodeInteger(sequence[1]);
             g = __utils._decodeInteger(sequence[2]);
-            // TODO: Validate values.
-            return new DSA_Params(p, q, g);
+                        return new DSA_Params(p, q, g);
         };
     }
     return _cached_decoder_for_DSA_Params(el);
@@ -307,15 +303,13 @@ export function _decode_ValidationParams(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "seed";
+                        sequence[0].name = "seed";
             sequence[1].name = "pgenCounter";
             let seed!: asn1.BIT_STRING;
             let pgenCounter!: asn1.INTEGER;
             seed = __utils._decodeBitString(sequence[0]);
             pgenCounter = __utils._decodeInteger(sequence[1]);
-            // TODO: Validate values.
-            return new ValidationParams(seed, pgenCounter);
+                        return new ValidationParams(seed, pgenCounter);
         };
     }
     return _cached_decoder_for_ValidationParams(el);
@@ -969,15 +963,13 @@ export function _decode_DSA_Sig_Value(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "r";
+                        sequence[0].name = "r";
             sequence[1].name = "s";
             let r!: asn1.INTEGER;
             let s!: asn1.INTEGER;
             r = __utils._decodeInteger(sequence[0]);
             s = __utils._decodeInteger(sequence[1]);
-            // TODO: Validate values.
-            return new DSA_Sig_Value(r, s);
+                        return new DSA_Sig_Value(r, s);
         };
     }
     return _cached_decoder_for_DSA_Sig_Value(el);
@@ -1053,15 +1045,13 @@ export function _decode_ECDSA_Sig_Value(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "r";
+                        sequence[0].name = "r";
             sequence[1].name = "s";
             let r!: asn1.INTEGER;
             let s!: asn1.INTEGER;
             r = __utils._decodeInteger(sequence[0]);
             s = __utils._decodeInteger(sequence[1]);
-            // TODO: Validate values.
-            return new ECDSA_Sig_Value(r, s);
+                        return new ECDSA_Sig_Value(r, s);
         };
     }
     return _cached_decoder_for_ECDSA_Sig_Value(el);

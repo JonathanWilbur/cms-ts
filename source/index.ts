@@ -8,3 +8,4 @@ export * as PKIX1Explicit_2009 from "./PKIX1Explicit-2009";
 export * as PKIX1Implicit_2009 from "./PKIX1Implicit-2009";
 export * as PKIXAttributeCertificate_2009 from "./PKIXAttributeCertificate-2009";
 export * as TokenizationManifest from "./TokenizationManifest";
+export * as PKIXAlgs_2009 from "./PKIXAlgs-2009";

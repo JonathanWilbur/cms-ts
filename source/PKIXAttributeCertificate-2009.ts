@@ -11,8 +11,6 @@ import * as asn1 from "asn1-ts";
 import * as __utils from "./__utils";
 import {
     AttributeSet,
-    Extensions,
-    SecurityCategory,
     _decode_AttributeSet,
     _encode_AttributeSet,
     _decode_Extensions,
@@ -33,40 +31,23 @@ export {
 } from "./PKIX-CommonTypes-2009";
 
 import {
-    AlgorithmIdentifier,
     _decode_AlgorithmIdentifier,
     _encode_AlgorithmIdentifier,
 } from "./AlgorithmInformation-2009";
 
 import {
-    CertificateSerialNumber,
-    UniqueIdentifier,
-    id_pkix,
-    id_pe,
     id_at,
-    SIGNED,
     _decode_CertificateSerialNumber,
     _encode_CertificateSerialNumber,
     _decode_UniqueIdentifier,
     _encode_UniqueIdentifier,
     _get_decoder_for_SIGNED,
     _get_encoder_for_SIGNED,
-} from "./PKIX1Explicit-2009";
-export {
-    CertificateSerialNumber,
-    UniqueIdentifier,
+} from "x500-ts/dist/node/AuthenticationFramework";
+
+import {
     id_pkix,
     id_pe,
-    id_kp,
-    id_ad,
-    id_at,
-    SIGNED,
-    _decode_CertificateSerialNumber,
-    _encode_CertificateSerialNumber,
-    _decode_UniqueIdentifier,
-    _encode_UniqueIdentifier,
-    _get_decoder_for_SIGNED,
-    _get_encoder_for_SIGNED,
 } from "./PKIX1Explicit-2009";
 
 import {
@@ -77,12 +58,91 @@ import {
     _encode_GeneralName,
     _decode_GeneralNames,
     _encode_GeneralNames,
-} from "./PKIX1Implicit-2009";
+} from "x500-ts/dist/node/CertificateExtensions";
 
 import {
     _decode_ContentInfo,
     _encode_ContentInfo,
 } from "./CryptographicMessageSyntax-2010";
+
+import {
+    ObjectDigestInfo,
+    IssuerSerial,
+    _decode_AttCertVersion,
+    _decode_Holder,
+    _decode_AttributeCertificate,
+    _decode_ObjectDigestInfo,
+    _decode_IssuerSerial,
+    _encode_AttCertVersion,
+    _encode_Holder,
+    _encode_AttributeCertificate,
+    _encode_ObjectDigestInfo,
+    _encode_IssuerSerial,
+    _encode_RoleSyntax,
+    _decode_RoleSyntax,
+    Targets,
+    _decode_Target,
+    _decode_Targets,
+    _decode_TargetCert,
+    _encode_Target,
+    _encode_Targets,
+    _encode_TargetCert,
+    _encode_AttCertValidityPeriod,
+    _decode_AttCertValidityPeriod,
+    _encode_AttCertIssuer,
+    _decode_AttCertIssuer,
+} from "x500-ts/dist/node/AttributeCertificateDefinitions";
+export {
+    AttCertVersion,
+    Holder,
+    AttributeCertificate,
+    ObjectDigestInfo,
+    IssuerSerial,
+    _decode_AttCertVersion,
+    _decode_Holder,
+    _decode_AttributeCertificate,
+    _decode_ObjectDigestInfo,
+    _decode_IssuerSerial,
+    _encode_AttCertVersion,
+    _encode_Holder,
+    _encode_AttributeCertificate,
+    _encode_ObjectDigestInfo,
+    _encode_IssuerSerial,
+    RoleSyntax,
+    _encode_RoleSyntax,
+    _decode_RoleSyntax,
+    Target,
+    Targets,
+    TargetCert,
+    _decode_Target,
+    _decode_Targets,
+    _decode_TargetCert,
+    _encode_Target,
+    _encode_Targets,
+    _encode_TargetCert,
+    AttCertValidityPeriod,
+    _encode_AttCertValidityPeriod,
+    _decode_AttCertValidityPeriod,
+    AttCertIssuer,
+    _encode_AttCertIssuer,
+    _decode_AttCertIssuer,
+} from "x500-ts/dist/node/AttributeCertificateDefinitions";
+
+import {
+    ClassList,
+    _decode_ClassList,
+    _decode_Clearance,
+    _encode_ClassList,
+    _encode_Clearance,
+} from "x500-ts/dist/node/EnhancedSecurity";
+export {
+    ClassList,
+    Clearance,
+    _decode_ClassList,
+    _decode_Clearance,
+    _encode_ClassList,
+    _encode_Clearance,
+} from "x500-ts/dist/node/EnhancedSecurity";
 
 // TODO: ObjectSetAssignment: AttributeCertExtensions
 
@@ -192,444 +252,6 @@ export const id_at_clearance_rfc3281: asn1.OBJECT_IDENTIFIER = new asn1.ObjectId
         /* clearance */ 55,
     ]
 );
-
-export type AttCertVersion = asn1.INTEGER;
-export const AttCertVersion_v2: AttCertVersion = 1; /* LONG_NAMED_INTEGER_VALUE */
-let _cached_decoder_for_AttCertVersion: __utils.ASN1Decoder<
-    AttCertVersion
-> | null = null;
-let _cached_encoder_for_AttCertVersion: __utils.ASN1Encoder<
-    AttCertVersion
-> | null = null;
-export function _decode_AttCertVersion(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_AttCertVersion) {
-        _cached_decoder_for_AttCertVersion = __utils._decodeInteger;
-    }
-    return _cached_decoder_for_AttCertVersion(el);
-}
-export function _encode_AttCertVersion(
-    value: AttCertVersion,
-    elGetter: __utils.ASN1Encoder<AttCertVersion>
-) {
-    if (!_cached_encoder_for_AttCertVersion) {
-        _cached_encoder_for_AttCertVersion = __utils._encodeInteger;
-    }
-    return _cached_encoder_for_AttCertVersion(value, elGetter);
-}
-
-export class IssuerSerial {
-    constructor(
-        readonly issuer: GeneralNames,
-        readonly serial: CertificateSerialNumber,
-        readonly issuerUID: asn1.OPTIONAL<UniqueIdentifier>
-    ) {}
-}
-export const _root_component_type_list_1_spec_for_IssuerSerial: __utils.ComponentSpec[] = [
-    new __utils.ComponentSpec(
-        "issuer",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 16),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "serial",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 2),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "issuerUID",
-        true,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 3),
-        undefined,
-        undefined
-    ),
-];
-export const _root_component_type_list_2_spec_for_IssuerSerial: __utils.ComponentSpec[] = [];
-export const _extension_additions_list_spec_for_IssuerSerial: __utils.ComponentSpec[] = [];
-let _cached_decoder_for_IssuerSerial: __utils.ASN1Decoder<
-    IssuerSerial
-> | null = null;
-let _cached_encoder_for_IssuerSerial: __utils.ASN1Encoder<
-    IssuerSerial
-> | null = null;
-export function _decode_IssuerSerial(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_IssuerSerial) {
-        _cached_decoder_for_IssuerSerial = function (
-            el: asn1.ASN1Element
-        ): IssuerSerial {
-            /* START_OF_SEQUENCE_COMPONENT_DECLARATIONS */
-            let issuer!: GeneralNames;
-            let serial!: CertificateSerialNumber;
-            let issuerUID: asn1.OPTIONAL<UniqueIdentifier>;
-            /* END_OF_SEQUENCE_COMPONENT_DECLARATIONS */
-            /* START_OF_CALLBACKS_MAP */
-            const callbacks: __utils.DecodingMap = {
-                issuer: (_el: asn1.ASN1Element): void => {
-                    issuer = _decode_GeneralNames(_el);
-                },
-                serial: (_el: asn1.ASN1Element): void => {
-                    serial = _decode_CertificateSerialNumber(_el);
-                },
-                issuerUID: (_el: asn1.ASN1Element): void => {
-                    issuerUID = _decode_UniqueIdentifier(_el);
-                },
-            };
-            /* END_OF_CALLBACKS_MAP */
-            __utils._parse_sequence(
-                el,
-                callbacks,
-                _root_component_type_list_1_spec_for_IssuerSerial,
-                _extension_additions_list_spec_for_IssuerSerial,
-                _root_component_type_list_2_spec_for_IssuerSerial,
-                undefined
-            );
-            return new IssuerSerial /* SEQUENCE_CONSTRUCTOR_CALL */(
-                issuer,
-                serial,
-                issuerUID
-            );
-        };
-    }
-    return _cached_decoder_for_IssuerSerial(el);
-}
-export function _encode_IssuerSerial(
-    value: IssuerSerial,
-    elGetter: __utils.ASN1Encoder<IssuerSerial>
-) {
-    if (!_cached_encoder_for_IssuerSerial) {
-        _cached_encoder_for_IssuerSerial = function (
-            value: IssuerSerial,
-            elGetter: __utils.ASN1Encoder<IssuerSerial>
-        ): asn1.ASN1Element {
-            return __utils._encodeSequence(
-                ([] as (asn1.ASN1Element | undefined)[])
-                    .concat([
-                        /* REQUIRED   */ _encode_GeneralNames(
-                            value.issuer,
-                            __utils.BER
-                        ),
-                        /* REQUIRED   */ _encode_CertificateSerialNumber(
-                            value.serial,
-                            __utils.BER
-                        ),
-                        /* IF_ABSENT  */ value.issuerUID === undefined
-                            ? undefined
-                            : _encode_UniqueIdentifier(
-                                  value.issuerUID,
-                                  __utils.BER
-                              ),
-                    ])
-                    .filter(
-                        (c: asn1.ASN1Element | undefined): boolean => !!c
-                    ) as asn1.ASN1Element[],
-                __utils.BER
-            );
-        };
-    }
-    return _cached_encoder_for_IssuerSerial(value, elGetter);
-}
-
-export enum ObjectDigestInfo_digestedObjectType {
-    publicKey = 0,
-    publicKeyCert = 1,
-    otherObjectTypes = 2,
-}
-export const ObjectDigestInfo_digestedObjectType_publicKey: ObjectDigestInfo_digestedObjectType =
-    ObjectDigestInfo_digestedObjectType.publicKey; /* LONG_NAMED_ENUMERATED_VALUE */
-export const ObjectDigestInfo_digestedObjectType_publicKeyCert: ObjectDigestInfo_digestedObjectType =
-    ObjectDigestInfo_digestedObjectType.publicKeyCert; /* LONG_NAMED_ENUMERATED_VALUE */
-export const ObjectDigestInfo_digestedObjectType_otherObjectTypes: ObjectDigestInfo_digestedObjectType =
-    ObjectDigestInfo_digestedObjectType.otherObjectTypes; /* LONG_NAMED_ENUMERATED_VALUE */
-let _cached_decoder_for_ObjectDigestInfo_digestedObjectType: __utils.ASN1Decoder<
-    ObjectDigestInfo_digestedObjectType
-> | null = null;
-let _cached_encoder_for_ObjectDigestInfo_digestedObjectType: __utils.ASN1Encoder<
-    ObjectDigestInfo_digestedObjectType
-> | null = null;
-export function _decode_ObjectDigestInfo_digestedObjectType(
-    el: asn1.ASN1Element
-) {
-    if (!_cached_decoder_for_ObjectDigestInfo_digestedObjectType) {
-        _cached_decoder_for_ObjectDigestInfo_digestedObjectType =
-            __utils._decodeEnumerated;
-    }
-    return _cached_decoder_for_ObjectDigestInfo_digestedObjectType(el);
-}
-export function _encode_ObjectDigestInfo_digestedObjectType(
-    value: ObjectDigestInfo_digestedObjectType,
-    elGetter: __utils.ASN1Encoder<ObjectDigestInfo_digestedObjectType>
-) {
-    if (!_cached_encoder_for_ObjectDigestInfo_digestedObjectType) {
-        _cached_encoder_for_ObjectDigestInfo_digestedObjectType =
-            __utils._encodeEnumerated;
-    }
-    return _cached_encoder_for_ObjectDigestInfo_digestedObjectType(
-        value,
-        elGetter
-    );
-}
-
-export class ObjectDigestInfo {
-    constructor(
-        readonly digestedObjectType: ObjectDigestInfo_digestedObjectType,
-        readonly otherObjectTypeID: asn1.OPTIONAL<asn1.OBJECT_IDENTIFIER>,
-        readonly digestAlgorithm: AlgorithmIdentifier,
-        readonly objectDigest: asn1.BIT_STRING
-    ) {}
-}
-export const _root_component_type_list_1_spec_for_ObjectDigestInfo: __utils.ComponentSpec[] = [
-    new __utils.ComponentSpec(
-        "digestedObjectType",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 10),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "otherObjectTypeID",
-        true,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 6),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "digestAlgorithm",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 16),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "objectDigest",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 3),
-        undefined,
-        undefined
-    ),
-];
-export const _root_component_type_list_2_spec_for_ObjectDigestInfo: __utils.ComponentSpec[] = [];
-export const _extension_additions_list_spec_for_ObjectDigestInfo: __utils.ComponentSpec[] = [];
-let _cached_decoder_for_ObjectDigestInfo: __utils.ASN1Decoder<
-    ObjectDigestInfo
-> | null = null;
-let _cached_encoder_for_ObjectDigestInfo: __utils.ASN1Encoder<
-    ObjectDigestInfo
-> | null = null;
-export function _decode_ObjectDigestInfo(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_ObjectDigestInfo) {
-        _cached_decoder_for_ObjectDigestInfo = function (
-            el: asn1.ASN1Element
-        ): ObjectDigestInfo {
-            /* START_OF_SEQUENCE_COMPONENT_DECLARATIONS */
-            let digestedObjectType!: ObjectDigestInfo_digestedObjectType;
-            let otherObjectTypeID: asn1.OPTIONAL<asn1.OBJECT_IDENTIFIER>;
-            let digestAlgorithm!: AlgorithmIdentifier;
-            let objectDigest!: asn1.BIT_STRING;
-            /* END_OF_SEQUENCE_COMPONENT_DECLARATIONS */
-            /* START_OF_CALLBACKS_MAP */
-            const callbacks: __utils.DecodingMap = {
-                digestedObjectType: (_el: asn1.ASN1Element): void => {
-                    digestedObjectType = _decode_ObjectDigestInfo_digestedObjectType(
-                        _el
-                    );
-                },
-                otherObjectTypeID: (_el: asn1.ASN1Element): void => {
-                    otherObjectTypeID = __utils._decodeObjectIdentifier(_el);
-                },
-                digestAlgorithm: (_el: asn1.ASN1Element): void => {
-                    digestAlgorithm = _decode_AlgorithmIdentifier(_el);
-                },
-                objectDigest: (_el: asn1.ASN1Element): void => {
-                    objectDigest = __utils._decodeBitString(_el);
-                },
-            };
-            /* END_OF_CALLBACKS_MAP */
-            __utils._parse_sequence(
-                el,
-                callbacks,
-                _root_component_type_list_1_spec_for_ObjectDigestInfo,
-                _extension_additions_list_spec_for_ObjectDigestInfo,
-                _root_component_type_list_2_spec_for_ObjectDigestInfo,
-                undefined
-            );
-            return new ObjectDigestInfo /* SEQUENCE_CONSTRUCTOR_CALL */(
-                digestedObjectType,
-                otherObjectTypeID,
-                digestAlgorithm,
-                objectDigest
-            );
-        };
-    }
-    return _cached_decoder_for_ObjectDigestInfo(el);
-}
-export function _encode_ObjectDigestInfo(
-    value: ObjectDigestInfo,
-    elGetter: __utils.ASN1Encoder<ObjectDigestInfo>
-) {
-    if (!_cached_encoder_for_ObjectDigestInfo) {
-        _cached_encoder_for_ObjectDigestInfo = function (
-            value: ObjectDigestInfo,
-            elGetter: __utils.ASN1Encoder<ObjectDigestInfo>
-        ): asn1.ASN1Element {
-            return __utils._encodeSequence(
-                ([] as (asn1.ASN1Element | undefined)[])
-                    .concat([
-                        /* REQUIRED   */ _encode_ObjectDigestInfo_digestedObjectType(
-                            value.digestedObjectType,
-                            __utils.BER
-                        ),
-                        /* IF_ABSENT  */ value.otherObjectTypeID === undefined
-                            ? undefined
-                            : __utils._encodeObjectIdentifier(
-                                  value.otherObjectTypeID,
-                                  __utils.BER
-                              ),
-                        /* REQUIRED   */ _encode_AlgorithmIdentifier(
-                            value.digestAlgorithm,
-                            __utils.BER
-                        ),
-                        /* REQUIRED   */ __utils._encodeBitString(
-                            value.objectDigest,
-                            __utils.BER
-                        ),
-                    ])
-                    .filter(
-                        (c: asn1.ASN1Element | undefined): boolean => !!c
-                    ) as asn1.ASN1Element[],
-                __utils.BER
-            );
-        };
-    }
-    return _cached_encoder_for_ObjectDigestInfo(value, elGetter);
-}
-
-export class Holder {
-    constructor(
-        readonly baseCertificateID: asn1.OPTIONAL<IssuerSerial>,
-        readonly entityName: asn1.OPTIONAL<GeneralNames>,
-        readonly objectDigestInfo: asn1.OPTIONAL<ObjectDigestInfo>
-    ) {}
-}
-export const _root_component_type_list_1_spec_for_Holder: __utils.ComponentSpec[] = [
-    new __utils.ComponentSpec(
-        "baseCertificateID",
-        true,
-        __utils.hasTag(asn1.ASN1TagClass.context, 0),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "entityName",
-        true,
-        __utils.hasTag(asn1.ASN1TagClass.context, 1),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "objectDigestInfo",
-        true,
-        __utils.hasTag(asn1.ASN1TagClass.context, 2),
-        undefined,
-        undefined
-    ),
-];
-export const _root_component_type_list_2_spec_for_Holder: __utils.ComponentSpec[] = [];
-export const _extension_additions_list_spec_for_Holder: __utils.ComponentSpec[] = [];
-let _cached_decoder_for_Holder: __utils.ASN1Decoder<Holder> | null = null;
-let _cached_encoder_for_Holder: __utils.ASN1Encoder<Holder> | null = null;
-export function _decode_Holder(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_Holder) {
-        _cached_decoder_for_Holder = function (el: asn1.ASN1Element): Holder {
-            /* START_OF_SEQUENCE_COMPONENT_DECLARATIONS */
-            let baseCertificateID: asn1.OPTIONAL<IssuerSerial>;
-            let entityName: asn1.OPTIONAL<GeneralNames>;
-            let objectDigestInfo: asn1.OPTIONAL<ObjectDigestInfo>;
-            /* END_OF_SEQUENCE_COMPONENT_DECLARATIONS */
-            /* START_OF_CALLBACKS_MAP */
-            const callbacks: __utils.DecodingMap = {
-                baseCertificateID: (_el: asn1.ASN1Element): void => {
-                    baseCertificateID = __utils._decode_implicit<IssuerSerial>(
-                        () => _decode_IssuerSerial
-                    )(_el);
-                },
-                entityName: (_el: asn1.ASN1Element): void => {
-                    entityName = __utils._decode_implicit<GeneralNames>(
-                        () => _decode_GeneralNames
-                    )(_el);
-                },
-                objectDigestInfo: (_el: asn1.ASN1Element): void => {
-                    objectDigestInfo = __utils._decode_implicit<
-                        ObjectDigestInfo
-                    >(() => _decode_ObjectDigestInfo)(_el);
-                },
-            };
-            /* END_OF_CALLBACKS_MAP */
-            __utils._parse_sequence(
-                el,
-                callbacks,
-                _root_component_type_list_1_spec_for_Holder,
-                _extension_additions_list_spec_for_Holder,
-                _root_component_type_list_2_spec_for_Holder,
-                undefined
-            );
-            return new Holder /* SEQUENCE_CONSTRUCTOR_CALL */(
-                baseCertificateID,
-                entityName,
-                objectDigestInfo
-            );
-        };
-    }
-    return _cached_decoder_for_Holder(el);
-}
-export function _encode_Holder(
-    value: Holder,
-    elGetter: __utils.ASN1Encoder<Holder>
-) {
-    if (!_cached_encoder_for_Holder) {
-        _cached_encoder_for_Holder = function (
-            value: Holder,
-            elGetter: __utils.ASN1Encoder<Holder>
-        ): asn1.ASN1Element {
-            return __utils._encodeSequence(
-                ([] as (asn1.ASN1Element | undefined)[])
-                    .concat([
-                        /* IF_ABSENT  */ value.baseCertificateID === undefined
-                            ? undefined
-                            : __utils._encode_implicit(
-                                  asn1.ASN1TagClass.context,
-                                  0,
-                                  () => _encode_IssuerSerial,
-                                  __utils.BER
-                              )(value.baseCertificateID, __utils.BER),
-                        /* IF_ABSENT  */ value.entityName === undefined
-                            ? undefined
-                            : __utils._encode_implicit(
-                                  asn1.ASN1TagClass.context,
-                                  1,
-                                  () => _encode_GeneralNames,
-                                  __utils.BER
-                              )(value.entityName, __utils.BER),
-                        /* IF_ABSENT  */ value.objectDigestInfo === undefined
-                            ? undefined
-                            : __utils._encode_implicit(
-                                  asn1.ASN1TagClass.context,
-                                  2,
-                                  () => _encode_ObjectDigestInfo,
-                                  __utils.BER
-                              )(value.objectDigestInfo, __utils.BER),
-                    ])
-                    .filter(
-                        (c: asn1.ASN1Element | undefined): boolean => !!c
-                    ) as asn1.ASN1Element[],
-                __utils.BER
-            );
-        };
-    }
-    return _cached_encoder_for_Holder(value, elGetter);
-}
 
 export class V2Form {
     constructor(
@@ -750,386 +372,6 @@ export function _encode_V2Form(
         };
     }
     return _cached_encoder_for_V2Form(value, elGetter);
-}
-
-export type AttCertIssuer =
-    | { v1Form: GeneralNames } /* CHOICE_ALT_ROOT */
-    | { v2Form: V2Form } /* CHOICE_ALT_ROOT */;
-let _cached_decoder_for_AttCertIssuer: __utils.ASN1Decoder<
-    AttCertIssuer
-> | null = null;
-let _cached_encoder_for_AttCertIssuer: __utils.ASN1Encoder<
-    AttCertIssuer
-> | null = null;
-export function _decode_AttCertIssuer(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_AttCertIssuer) {
-        _cached_decoder_for_AttCertIssuer = __utils._decode_inextensible_choice<
-            AttCertIssuer
-        >({
-            "UNIVERSAL 16": ["v1Form", _decode_GeneralNames],
-            "CONTEXT 0": [
-                "v2Form",
-                __utils._decode_implicit<V2Form>(() => _decode_V2Form),
-            ],
-        });
-    }
-    return _cached_decoder_for_AttCertIssuer(el);
-}
-export function _encode_AttCertIssuer(
-    value: AttCertIssuer,
-    elGetter: __utils.ASN1Encoder<AttCertIssuer>
-) {
-    if (!_cached_encoder_for_AttCertIssuer) {
-        _cached_encoder_for_AttCertIssuer = __utils._encode_choice<
-            AttCertIssuer
-        >(
-            {
-                v1Form: _encode_GeneralNames,
-                v2Form: __utils._encode_implicit(
-                    asn1.ASN1TagClass.context,
-                    0,
-                    () => _encode_V2Form,
-                    __utils.BER
-                ),
-            },
-            __utils.BER
-        );
-    }
-    return _cached_encoder_for_AttCertIssuer(value, elGetter);
-}
-
-export class AttCertValidityPeriod {
-    constructor(
-        readonly notBeforeTim: asn1.GeneralizedTime,
-        readonly notAfterTime: asn1.GeneralizedTime
-    ) {}
-}
-export const _root_component_type_list_1_spec_for_AttCertValidityPeriod: __utils.ComponentSpec[] = [
-    new __utils.ComponentSpec(
-        "notBeforeTim",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 24),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "notAfterTime",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 24),
-        undefined,
-        undefined
-    ),
-];
-export const _root_component_type_list_2_spec_for_AttCertValidityPeriod: __utils.ComponentSpec[] = [];
-export const _extension_additions_list_spec_for_AttCertValidityPeriod: __utils.ComponentSpec[] = [];
-let _cached_decoder_for_AttCertValidityPeriod: __utils.ASN1Decoder<
-    AttCertValidityPeriod
-> | null = null;
-let _cached_encoder_for_AttCertValidityPeriod: __utils.ASN1Encoder<
-    AttCertValidityPeriod
-> | null = null;
-export function _decode_AttCertValidityPeriod(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_AttCertValidityPeriod) {
-        _cached_decoder_for_AttCertValidityPeriod = function (
-            el: asn1.ASN1Element
-        ): AttCertValidityPeriod {
-            const sequence: asn1.ASN1Element[] = el.sequence;
-            if (sequence.length < 2) {
-                throw new asn1.ASN1ConstructionError(
-                    "AttCertValidityPeriod contained only " +
-                        sequence.length.toString() +
-                        " elements."
-                );
-            }
-            // TODO: Validate tags.
-            sequence[0].name = "notBeforeTim";
-            sequence[1].name = "notAfterTime";
-            let notBeforeTim!: asn1.GeneralizedTime;
-            let notAfterTime!: asn1.GeneralizedTime;
-            notBeforeTim = __utils._decodeGeneralizedTime(sequence[0]);
-            notAfterTime = __utils._decodeGeneralizedTime(sequence[1]);
-            // TODO: Validate values.
-            return new AttCertValidityPeriod(notBeforeTim, notAfterTime);
-        };
-    }
-    return _cached_decoder_for_AttCertValidityPeriod(el);
-}
-export function _encode_AttCertValidityPeriod(
-    value: AttCertValidityPeriod,
-    elGetter: __utils.ASN1Encoder<AttCertValidityPeriod>
-) {
-    if (!_cached_encoder_for_AttCertValidityPeriod) {
-        _cached_encoder_for_AttCertValidityPeriod = function (
-            value: AttCertValidityPeriod,
-            elGetter: __utils.ASN1Encoder<AttCertValidityPeriod>
-        ): asn1.ASN1Element {
-            return __utils._encodeSequence(
-                ([] as (asn1.ASN1Element | undefined)[])
-                    .concat([
-                        /* REQUIRED   */ __utils._encodeGeneralizedTime(
-                            value.notBeforeTim,
-                            __utils.BER
-                        ),
-                        /* REQUIRED   */ __utils._encodeGeneralizedTime(
-                            value.notAfterTime,
-                            __utils.BER
-                        ),
-                    ])
-                    .filter(
-                        (c: asn1.ASN1Element | undefined): boolean => !!c
-                    ) as asn1.ASN1Element[],
-                __utils.BER
-            );
-        };
-    }
-    return _cached_encoder_for_AttCertValidityPeriod(value, elGetter);
-}
-
-export class AttributeCertificateInfo {
-    constructor(
-        readonly version: AttCertVersion,
-        readonly holder: Holder,
-        readonly issuer: AttCertIssuer,
-        readonly signature: AlgorithmIdentifier,
-        readonly serialNumber: CertificateSerialNumber,
-        readonly attrCertValidityPeriod: AttCertValidityPeriod,
-        readonly attributes: AttributeSet[],
-        readonly issuerUniqueID: asn1.OPTIONAL<UniqueIdentifier>,
-        readonly extensions: asn1.OPTIONAL<Extensions>
-    ) {}
-}
-export const _root_component_type_list_1_spec_for_AttributeCertificateInfo: __utils.ComponentSpec[] = [
-    new __utils.ComponentSpec(
-        "version",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 2),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "holder",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 16),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "issuer",
-        false,
-        __utils.hasAnyTag,
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "signature",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 16),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "serialNumber",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 2),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "attrCertValidityPeriod",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 16),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "attributes",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 16),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "issuerUniqueID",
-        true,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 3),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "extensions",
-        true,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 16),
-        undefined,
-        undefined
-    ),
-];
-export const _root_component_type_list_2_spec_for_AttributeCertificateInfo: __utils.ComponentSpec[] = [];
-export const _extension_additions_list_spec_for_AttributeCertificateInfo: __utils.ComponentSpec[] = [];
-let _cached_decoder_for_AttributeCertificateInfo: __utils.ASN1Decoder<
-    AttributeCertificateInfo
-> | null = null;
-let _cached_encoder_for_AttributeCertificateInfo: __utils.ASN1Encoder<
-    AttributeCertificateInfo
-> | null = null;
-export function _decode_AttributeCertificateInfo(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_AttributeCertificateInfo) {
-        _cached_decoder_for_AttributeCertificateInfo = function (
-            el: asn1.ASN1Element
-        ): AttributeCertificateInfo {
-            /* START_OF_SEQUENCE_COMPONENT_DECLARATIONS */
-            let version!: AttCertVersion;
-            let holder!: Holder;
-            let issuer!: AttCertIssuer;
-            let signature!: AlgorithmIdentifier;
-            let serialNumber!: CertificateSerialNumber;
-            let attrCertValidityPeriod!: AttCertValidityPeriod;
-            let attributes!: AttributeSet[];
-            let issuerUniqueID: asn1.OPTIONAL<UniqueIdentifier>;
-            let extensions: asn1.OPTIONAL<Extensions>;
-            /* END_OF_SEQUENCE_COMPONENT_DECLARATIONS */
-            /* START_OF_CALLBACKS_MAP */
-            const callbacks: __utils.DecodingMap = {
-                version: (_el: asn1.ASN1Element): void => {
-                    version = _decode_AttCertVersion(_el);
-                },
-                holder: (_el: asn1.ASN1Element): void => {
-                    holder = _decode_Holder(_el);
-                },
-                issuer: (_el: asn1.ASN1Element): void => {
-                    issuer = _decode_AttCertIssuer(_el);
-                },
-                signature: (_el: asn1.ASN1Element): void => {
-                    signature = _decode_AlgorithmIdentifier(_el);
-                },
-                serialNumber: (_el: asn1.ASN1Element): void => {
-                    serialNumber = _decode_CertificateSerialNumber(_el);
-                },
-                attrCertValidityPeriod: (_el: asn1.ASN1Element): void => {
-                    attrCertValidityPeriod = _decode_AttCertValidityPeriod(_el);
-                },
-                attributes: (_el: asn1.ASN1Element): void => {
-                    attributes = __utils._decodeSequenceOf<AttributeSet>(
-                        () => _decode_AttributeSet
-                    )(_el);
-                },
-                issuerUniqueID: (_el: asn1.ASN1Element): void => {
-                    issuerUniqueID = _decode_UniqueIdentifier(_el);
-                },
-                extensions: (_el: asn1.ASN1Element): void => {
-                    extensions = _decode_Extensions(_el);
-                },
-            };
-            /* END_OF_CALLBACKS_MAP */
-            __utils._parse_sequence(
-                el,
-                callbacks,
-                _root_component_type_list_1_spec_for_AttributeCertificateInfo,
-                _extension_additions_list_spec_for_AttributeCertificateInfo,
-                _root_component_type_list_2_spec_for_AttributeCertificateInfo,
-                undefined
-            );
-            return new AttributeCertificateInfo /* SEQUENCE_CONSTRUCTOR_CALL */(
-                version,
-                holder,
-                issuer,
-                signature,
-                serialNumber,
-                attrCertValidityPeriod,
-                attributes,
-                issuerUniqueID,
-                extensions
-            );
-        };
-    }
-    return _cached_decoder_for_AttributeCertificateInfo(el);
-}
-export function _encode_AttributeCertificateInfo(
-    value: AttributeCertificateInfo,
-    elGetter: __utils.ASN1Encoder<AttributeCertificateInfo>
-) {
-    if (!_cached_encoder_for_AttributeCertificateInfo) {
-        _cached_encoder_for_AttributeCertificateInfo = function (
-            value: AttributeCertificateInfo,
-            elGetter: __utils.ASN1Encoder<AttributeCertificateInfo>
-        ): asn1.ASN1Element {
-            return __utils._encodeSequence(
-                ([] as (asn1.ASN1Element | undefined)[])
-                    .concat([
-                        /* REQUIRED   */ _encode_AttCertVersion(
-                            value.version,
-                            __utils.BER
-                        ),
-                        /* REQUIRED   */ _encode_Holder(
-                            value.holder,
-                            __utils.BER
-                        ),
-                        /* REQUIRED   */ _encode_AttCertIssuer(
-                            value.issuer,
-                            __utils.BER
-                        ),
-                        /* REQUIRED   */ _encode_AlgorithmIdentifier(
-                            value.signature,
-                            __utils.BER
-                        ),
-                        /* REQUIRED   */ _encode_CertificateSerialNumber(
-                            value.serialNumber,
-                            __utils.BER
-                        ),
-                        /* REQUIRED   */ _encode_AttCertValidityPeriod(
-                            value.attrCertValidityPeriod,
-                            __utils.BER
-                        ),
-                        /* REQUIRED   */ __utils._encodeSequenceOf<
-                            AttributeSet
-                        >(() => _encode_AttributeSet, __utils.BER)(
-                            value.attributes,
-                            __utils.BER
-                        ),
-                        /* IF_ABSENT  */ value.issuerUniqueID === undefined
-                            ? undefined
-                            : _encode_UniqueIdentifier(
-                                  value.issuerUniqueID,
-                                  __utils.BER
-                              ),
-                        /* IF_ABSENT  */ value.extensions === undefined
-                            ? undefined
-                            : _encode_Extensions(value.extensions, __utils.BER),
-                    ])
-                    .filter(
-                        (c: asn1.ASN1Element | undefined): boolean => !!c
-                    ) as asn1.ASN1Element[],
-                __utils.BER
-            );
-        };
-    }
-    return _cached_encoder_for_AttributeCertificateInfo(value, elGetter);
-}
-
-export type AttributeCertificate = SIGNED<AttributeCertificateInfo>; // DefinedType
-let _cached_decoder_for_AttributeCertificate: __utils.ASN1Decoder<
-    AttributeCertificate
-> | null = null;
-let _cached_encoder_for_AttributeCertificate: __utils.ASN1Encoder<
-    AttributeCertificate
-> | null = null;
-export function _decode_AttributeCertificate(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_AttributeCertificate) {
-        _cached_decoder_for_AttributeCertificate = _get_decoder_for_SIGNED<
-            AttributeCertificateInfo
-        >(_decode_AttributeCertificateInfo);
-    }
-    return _cached_decoder_for_AttributeCertificate(el);
-}
-export function _encode_AttributeCertificate(
-    value: AttributeCertificate,
-    elGetter: __utils.ASN1Encoder<AttributeCertificate>
-) {
-    if (!_cached_encoder_for_AttributeCertificate) {
-        _cached_encoder_for_AttributeCertificate = _get_encoder_for_SIGNED<
-            AttributeCertificateInfo
-        >(_encode_AttributeCertificateInfo);
-    }
-    return _cached_encoder_for_AttributeCertificate(value, elGetter);
 }
 
 export type AttrSpec = asn1.OBJECT_IDENTIFIER[]; // SequenceOfType
@@ -1308,210 +550,6 @@ export function _encode_AAControls(
         };
     }
     return _cached_encoder_for_AAControls(value, elGetter);
-}
-
-export class TargetCert {
-    constructor(
-        readonly targetCertificate: IssuerSerial,
-        readonly targetName: asn1.OPTIONAL<GeneralName>,
-        readonly certDigestInfo: asn1.OPTIONAL<ObjectDigestInfo>
-    ) {}
-}
-export const _root_component_type_list_1_spec_for_TargetCert: __utils.ComponentSpec[] = [
-    new __utils.ComponentSpec(
-        "targetCertificate",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 16),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "targetName",
-        true,
-        __utils.hasAnyTag,
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "certDigestInfo",
-        true,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 16),
-        undefined,
-        undefined
-    ),
-];
-export const _root_component_type_list_2_spec_for_TargetCert: __utils.ComponentSpec[] = [];
-export const _extension_additions_list_spec_for_TargetCert: __utils.ComponentSpec[] = [];
-let _cached_decoder_for_TargetCert: __utils.ASN1Decoder<
-    TargetCert
-> | null = null;
-let _cached_encoder_for_TargetCert: __utils.ASN1Encoder<
-    TargetCert
-> | null = null;
-export function _decode_TargetCert(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_TargetCert) {
-        _cached_decoder_for_TargetCert = function (
-            el: asn1.ASN1Element
-        ): TargetCert {
-            /* START_OF_SEQUENCE_COMPONENT_DECLARATIONS */
-            let targetCertificate!: IssuerSerial;
-            let targetName: asn1.OPTIONAL<GeneralName>;
-            let certDigestInfo: asn1.OPTIONAL<ObjectDigestInfo>;
-            /* END_OF_SEQUENCE_COMPONENT_DECLARATIONS */
-            /* START_OF_CALLBACKS_MAP */
-            const callbacks: __utils.DecodingMap = {
-                targetCertificate: (_el: asn1.ASN1Element): void => {
-                    targetCertificate = _decode_IssuerSerial(_el);
-                },
-                targetName: (_el: asn1.ASN1Element): void => {
-                    targetName = _decode_GeneralName(_el);
-                },
-                certDigestInfo: (_el: asn1.ASN1Element): void => {
-                    certDigestInfo = _decode_ObjectDigestInfo(_el);
-                },
-            };
-            /* END_OF_CALLBACKS_MAP */
-            __utils._parse_sequence(
-                el,
-                callbacks,
-                _root_component_type_list_1_spec_for_TargetCert,
-                _extension_additions_list_spec_for_TargetCert,
-                _root_component_type_list_2_spec_for_TargetCert,
-                undefined
-            );
-            return new TargetCert /* SEQUENCE_CONSTRUCTOR_CALL */(
-                targetCertificate,
-                targetName,
-                certDigestInfo
-            );
-        };
-    }
-    return _cached_decoder_for_TargetCert(el);
-}
-export function _encode_TargetCert(
-    value: TargetCert,
-    elGetter: __utils.ASN1Encoder<TargetCert>
-) {
-    if (!_cached_encoder_for_TargetCert) {
-        _cached_encoder_for_TargetCert = function (
-            value: TargetCert,
-            elGetter: __utils.ASN1Encoder<TargetCert>
-        ): asn1.ASN1Element {
-            return __utils._encodeSequence(
-                ([] as (asn1.ASN1Element | undefined)[])
-                    .concat([
-                        /* REQUIRED   */ _encode_IssuerSerial(
-                            value.targetCertificate,
-                            __utils.BER
-                        ),
-                        /* IF_ABSENT  */ value.targetName === undefined
-                            ? undefined
-                            : _encode_GeneralName(
-                                  value.targetName,
-                                  __utils.BER
-                              ),
-                        /* IF_ABSENT  */ value.certDigestInfo === undefined
-                            ? undefined
-                            : _encode_ObjectDigestInfo(
-                                  value.certDigestInfo,
-                                  __utils.BER
-                              ),
-                    ])
-                    .filter(
-                        (c: asn1.ASN1Element | undefined): boolean => !!c
-                    ) as asn1.ASN1Element[],
-                __utils.BER
-            );
-        };
-    }
-    return _cached_encoder_for_TargetCert(value, elGetter);
-}
-
-export type Target =
-    | { targetName: GeneralName } /* CHOICE_ALT_ROOT */
-    | { targetGroup: GeneralName } /* CHOICE_ALT_ROOT */
-    | { targetCert: TargetCert } /* CHOICE_ALT_ROOT */;
-let _cached_decoder_for_Target: __utils.ASN1Decoder<Target> | null = null;
-let _cached_encoder_for_Target: __utils.ASN1Encoder<Target> | null = null;
-export function _decode_Target(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_Target) {
-        _cached_decoder_for_Target = __utils._decode_inextensible_choice<
-            Target
-        >({
-            "CONTEXT 0": [
-                "targetName",
-                __utils._decode_implicit<GeneralName>(
-                    () => _decode_GeneralName
-                ),
-            ],
-            "CONTEXT 1": [
-                "targetGroup",
-                __utils._decode_implicit<GeneralName>(
-                    () => _decode_GeneralName
-                ),
-            ],
-            "CONTEXT 2": [
-                "targetCert",
-                __utils._decode_implicit<TargetCert>(() => _decode_TargetCert),
-            ],
-        });
-    }
-    return _cached_decoder_for_Target(el);
-}
-export function _encode_Target(
-    value: Target,
-    elGetter: __utils.ASN1Encoder<Target>
-) {
-    if (!_cached_encoder_for_Target) {
-        _cached_encoder_for_Target = __utils._encode_choice<Target>(
-            {
-                targetName: __utils._encode_implicit(
-                    asn1.ASN1TagClass.context,
-                    0,
-                    () => _encode_GeneralName,
-                    __utils.BER
-                ),
-                targetGroup: __utils._encode_implicit(
-                    asn1.ASN1TagClass.context,
-                    1,
-                    () => _encode_GeneralName,
-                    __utils.BER
-                ),
-                targetCert: __utils._encode_implicit(
-                    asn1.ASN1TagClass.context,
-                    2,
-                    () => _encode_TargetCert,
-                    __utils.BER
-                ),
-            },
-            __utils.BER
-        );
-    }
-    return _cached_encoder_for_Target(value, elGetter);
-}
-
-export type Targets = Target[]; // SequenceOfType
-let _cached_decoder_for_Targets: __utils.ASN1Decoder<Targets> | null = null;
-let _cached_encoder_for_Targets: __utils.ASN1Encoder<Targets> | null = null;
-export function _decode_Targets(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_Targets) {
-        _cached_decoder_for_Targets = __utils._decodeSequenceOf<Target>(
-            () => _decode_Target
-        );
-    }
-    return _cached_decoder_for_Targets(el);
-}
-export function _encode_Targets(
-    value: Targets,
-    elGetter: __utils.ASN1Encoder<Targets>
-) {
-    if (!_cached_encoder_for_Targets) {
-        _cached_encoder_for_Targets = __utils._encodeSequenceOf<Target>(
-            () => _encode_Target,
-            __utils.BER
-        );
-    }
-    return _cached_encoder_for_Targets(value, elGetter);
 }
 
 export type ProxyInfo = Targets[]; // SequenceOfType
@@ -1800,257 +838,6 @@ export function _encode_SvceAuthInfo(
     return _cached_encoder_for_SvceAuthInfo(value, elGetter);
 }
 
-export class RoleSyntax {
-    constructor(
-        readonly roleAuthority: asn1.OPTIONAL<GeneralNames>,
-        readonly roleName: GeneralName
-    ) {}
-}
-export const _root_component_type_list_1_spec_for_RoleSyntax: __utils.ComponentSpec[] = [
-    new __utils.ComponentSpec(
-        "roleAuthority",
-        true,
-        __utils.hasTag(asn1.ASN1TagClass.context, 0),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "roleName",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.context, 1),
-        undefined,
-        undefined
-    ),
-];
-export const _root_component_type_list_2_spec_for_RoleSyntax: __utils.ComponentSpec[] = [];
-export const _extension_additions_list_spec_for_RoleSyntax: __utils.ComponentSpec[] = [];
-let _cached_decoder_for_RoleSyntax: __utils.ASN1Decoder<
-    RoleSyntax
-> | null = null;
-let _cached_encoder_for_RoleSyntax: __utils.ASN1Encoder<
-    RoleSyntax
-> | null = null;
-export function _decode_RoleSyntax(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_RoleSyntax) {
-        _cached_decoder_for_RoleSyntax = function (
-            el: asn1.ASN1Element
-        ): RoleSyntax {
-            /* START_OF_SEQUENCE_COMPONENT_DECLARATIONS */
-            let roleAuthority: asn1.OPTIONAL<GeneralNames>;
-            let roleName!: GeneralName;
-            /* END_OF_SEQUENCE_COMPONENT_DECLARATIONS */
-            /* START_OF_CALLBACKS_MAP */
-            const callbacks: __utils.DecodingMap = {
-                roleAuthority: (_el: asn1.ASN1Element): void => {
-                    roleAuthority = __utils._decode_implicit<GeneralNames>(
-                        () => _decode_GeneralNames
-                    )(_el);
-                },
-                roleName: (_el: asn1.ASN1Element): void => {
-                    roleName = __utils._decode_implicit<GeneralName>(
-                        () => _decode_GeneralName
-                    )(_el);
-                },
-            };
-            /* END_OF_CALLBACKS_MAP */
-            __utils._parse_sequence(
-                el,
-                callbacks,
-                _root_component_type_list_1_spec_for_RoleSyntax,
-                _extension_additions_list_spec_for_RoleSyntax,
-                _root_component_type_list_2_spec_for_RoleSyntax,
-                undefined
-            );
-            return new RoleSyntax /* SEQUENCE_CONSTRUCTOR_CALL */(
-                roleAuthority,
-                roleName
-            );
-        };
-    }
-    return _cached_decoder_for_RoleSyntax(el);
-}
-export function _encode_RoleSyntax(
-    value: RoleSyntax,
-    elGetter: __utils.ASN1Encoder<RoleSyntax>
-) {
-    if (!_cached_encoder_for_RoleSyntax) {
-        _cached_encoder_for_RoleSyntax = function (
-            value: RoleSyntax,
-            elGetter: __utils.ASN1Encoder<RoleSyntax>
-        ): asn1.ASN1Element {
-            return __utils._encodeSequence(
-                ([] as (asn1.ASN1Element | undefined)[])
-                    .concat([
-                        /* IF_ABSENT  */ value.roleAuthority === undefined
-                            ? undefined
-                            : __utils._encode_implicit(
-                                  asn1.ASN1TagClass.context,
-                                  0,
-                                  () => _encode_GeneralNames,
-                                  __utils.BER
-                              )(value.roleAuthority, __utils.BER),
-                        /* REQUIRED   */ __utils._encode_implicit(
-                            asn1.ASN1TagClass.context,
-                            1,
-                            () => _encode_GeneralName,
-                            __utils.BER
-                        )(value.roleName, __utils.BER),
-                    ])
-                    .filter(
-                        (c: asn1.ASN1Element | undefined): boolean => !!c
-                    ) as asn1.ASN1Element[],
-                __utils.BER
-            );
-        };
-    }
-    return _cached_encoder_for_RoleSyntax(value, elGetter);
-}
-
-export type ClassList = asn1.BIT_STRING;
-export const ClassList_unmarked: number = 0; /* LONG_NAMED_BIT */
-export const ClassList_unclassified: number = 1; /* LONG_NAMED_BIT */
-export const ClassList_restricted: number = 2; /* LONG_NAMED_BIT */
-export const ClassList_confidential: number = 3; /* LONG_NAMED_BIT */
-export const ClassList_secret: number = 4; /* LONG_NAMED_BIT */
-export const ClassList_topSecret: number = 5; /* LONG_NAMED_BIT */
-let _cached_decoder_for_ClassList: __utils.ASN1Decoder<ClassList> | null = null;
-let _cached_encoder_for_ClassList: __utils.ASN1Encoder<ClassList> | null = null;
-export function _decode_ClassList(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_ClassList) {
-        _cached_decoder_for_ClassList = __utils._decodeBitString;
-    }
-    return _cached_decoder_for_ClassList(el);
-}
-export function _encode_ClassList(
-    value: ClassList,
-    elGetter: __utils.ASN1Encoder<ClassList>
-) {
-    if (!_cached_encoder_for_ClassList) {
-        _cached_encoder_for_ClassList = __utils._encodeBitString;
-    }
-    return _cached_encoder_for_ClassList(value, elGetter);
-}
-
-export class Clearance {
-    constructor(
-        readonly policyId: asn1.OBJECT_IDENTIFIER,
-        readonly classList: asn1.OPTIONAL<ClassList>,
-        readonly securityCategories: asn1.OPTIONAL<SecurityCategory[]>
-    ) {}
-    public static get _default_value_for_classList() {
-        return new Uint8ClampedArray([asn1.FALSE_BIT, asn1.TRUE_BIT]);
-    }
-}
-export const _root_component_type_list_1_spec_for_Clearance: __utils.ComponentSpec[] = [
-    new __utils.ComponentSpec(
-        "policyId",
-        false,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 6),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "classList",
-        true,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 3),
-        undefined,
-        undefined
-    ),
-    new __utils.ComponentSpec(
-        "securityCategories",
-        true,
-        __utils.hasTag(asn1.ASN1TagClass.universal, 17),
-        undefined,
-        undefined
-    ),
-];
-export const _root_component_type_list_2_spec_for_Clearance: __utils.ComponentSpec[] = [];
-export const _extension_additions_list_spec_for_Clearance: __utils.ComponentSpec[] = [];
-let _cached_decoder_for_Clearance: __utils.ASN1Decoder<Clearance> | null = null;
-let _cached_encoder_for_Clearance: __utils.ASN1Encoder<Clearance> | null = null;
-export function _decode_Clearance(el: asn1.ASN1Element) {
-    if (!_cached_decoder_for_Clearance) {
-        _cached_decoder_for_Clearance = function (
-            el: asn1.ASN1Element
-        ): Clearance {
-            /* START_OF_SEQUENCE_COMPONENT_DECLARATIONS */
-            let policyId!: asn1.OBJECT_IDENTIFIER;
-            let classList: asn1.OPTIONAL<ClassList> =
-                Clearance._default_value_for_classList;
-            let securityCategories: asn1.OPTIONAL<SecurityCategory[]>;
-            /* END_OF_SEQUENCE_COMPONENT_DECLARATIONS */
-            /* START_OF_CALLBACKS_MAP */
-            const callbacks: __utils.DecodingMap = {
-                policyId: (_el: asn1.ASN1Element): void => {
-                    policyId = __utils._decodeObjectIdentifier(_el);
-                },
-                classList: (_el: asn1.ASN1Element): void => {
-                    classList = _decode_ClassList(_el);
-                },
-                securityCategories: (_el: asn1.ASN1Element): void => {
-                    securityCategories = __utils._decodeSetOf<SecurityCategory>(
-                        () => _decode_SecurityCategory
-                    )(_el);
-                },
-            };
-            /* END_OF_CALLBACKS_MAP */
-            __utils._parse_sequence(
-                el,
-                callbacks,
-                _root_component_type_list_1_spec_for_Clearance,
-                _extension_additions_list_spec_for_Clearance,
-                _root_component_type_list_2_spec_for_Clearance,
-                undefined
-            );
-            return new Clearance /* SEQUENCE_CONSTRUCTOR_CALL */(
-                policyId,
-                classList,
-                securityCategories
-            );
-        };
-    }
-    return _cached_decoder_for_Clearance(el);
-}
-export function _encode_Clearance(
-    value: Clearance,
-    elGetter: __utils.ASN1Encoder<Clearance>
-) {
-    if (!_cached_encoder_for_Clearance) {
-        _cached_encoder_for_Clearance = function (
-            value: Clearance,
-            elGetter: __utils.ASN1Encoder<Clearance>
-        ): asn1.ASN1Element {
-            return __utils._encodeSequence(
-                ([] as (asn1.ASN1Element | undefined)[])
-                    .concat([
-                        /* REQUIRED   */ __utils._encodeObjectIdentifier(
-                            value.policyId,
-                            __utils.BER
-                        ),
-                        /* IF_DEFAULT */ value.classList === undefined ||
-                        __utils.deepEq(
-                            value.classList,
-                            Clearance._default_value_for_classList
-                        )
-                            ? undefined
-                            : _encode_ClassList(value.classList, __utils.BER),
-                        /* IF_ABSENT  */ value.securityCategories === undefined
-                            ? undefined
-                            : __utils._encodeSetOf<SecurityCategory>(
-                                  () => _encode_SecurityCategory,
-                                  __utils.BER
-                              )(value.securityCategories, __utils.BER),
-                    ])
-                    .filter(
-                        (c: asn1.ASN1Element | undefined): boolean => !!c
-                    ) as asn1.ASN1Element[],
-                __utils.BER
-            );
-        };
-    }
-    return _cached_encoder_for_Clearance(value, elGetter);
-}
-
 export class SecurityCategory_rfc3281 {
     constructor(
         readonly type_: asn1.OBJECT_IDENTIFIER,
@@ -2094,8 +881,7 @@ export function _decode_SecurityCategory_rfc3281(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "type";
+                        sequence[0].name = "type";
             sequence[1].name = "value";
             let type_!: asn1.OBJECT_IDENTIFIER;
             let value!: asn1.ASN1Element;
@@ -2105,8 +891,7 @@ export function _decode_SecurityCategory_rfc3281(el: asn1.ASN1Element) {
             value = __utils._decode_explicit<asn1.ASN1Element>(
                 () => __utils._decodeAny
             )(sequence[1]);
-            // TODO: Validate values.
-            return new SecurityCategory_rfc3281(type_, value);
+                        return new SecurityCategory_rfc3281(type_, value);
         };
     }
     return _cached_decoder_for_SecurityCategory_rfc3281(el);
@@ -2347,8 +1132,7 @@ export function _decode_ACClearAttrs(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "acIssuer";
+                        sequence[0].name = "acIssuer";
             sequence[1].name = "acSerial";
             sequence[2].name = "attrs";
             let acIssuer!: GeneralName;
@@ -2359,8 +1143,7 @@ export function _decode_ACClearAttrs(el: asn1.ASN1Element) {
             attrs = __utils._decodeSequenceOf<AttributeSet>(
                 () => _decode_AttributeSet
             )(sequence[2]);
-            // TODO: Validate values.
-            return new ACClearAttrs(acIssuer, acSerial, attrs);
+                        return new ACClearAttrs(acIssuer, acSerial, attrs);
         };
     }
     return _cached_decoder_for_ACClearAttrs(el);

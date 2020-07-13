@@ -776,15 +776,13 @@ export function _decode_BuiltInDomainDefinedAttribute(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "type";
+                        sequence[0].name = "type";
             sequence[1].name = "value";
             let type_!: asn1.PrintableString;
             let value!: asn1.PrintableString;
             type_ = __utils._decodePrintableString(sequence[0]);
             value = __utils._decodePrintableString(sequence[1]);
-            // TODO: Validate values.
-            return new BuiltInDomainDefinedAttribute(type_, value);
+                        return new BuiltInDomainDefinedAttribute(type_, value);
         };
     }
     return _cached_decoder_for_BuiltInDomainDefinedAttribute(el);
@@ -890,8 +888,7 @@ export function _decode_ExtensionAttribute(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "extension-attribute-type";
+                        sequence[0].name = "extension-attribute-type";
             sequence[1].name = "extension-attribute-value";
             let extension_attribute_type!: asn1.INTEGER;
             let extension_attribute_value!: asn1.ASN1Element;
@@ -901,8 +898,7 @@ export function _decode_ExtensionAttribute(el: asn1.ASN1Element) {
             extension_attribute_value = __utils._decode_explicit<
                 asn1.ASN1Element
             >(() => __utils._decodeAny)(sequence[1]);
-            // TODO: Validate values.
-            return new ExtensionAttribute(
+                        return new ExtensionAttribute(
                 extension_attribute_type,
                 extension_attribute_value
             );
@@ -1474,15 +1470,13 @@ export function _decode_TeletexDomainDefinedAttribute(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "type";
+                        sequence[0].name = "type";
             sequence[1].name = "value";
             let type_!: asn1.TeletexString;
             let value!: asn1.TeletexString;
             type_ = __utils._decodeTeletexString(sequence[0]);
             value = __utils._decodeTeletexString(sequence[1]);
-            // TODO: Validate values.
-            return new TeletexDomainDefinedAttribute(type_, value);
+                        return new TeletexDomainDefinedAttribute(type_, value);
         };
     }
     return _cached_decoder_for_TeletexDomainDefinedAttribute(el);

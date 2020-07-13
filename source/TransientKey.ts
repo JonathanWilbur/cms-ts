@@ -674,8 +674,7 @@ export function _decode_SignedIntervalSpec(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "intervalSpec";
+                        sequence[0].name = "intervalSpec";
             sequence[1].name = "signature";
             sequence[2].name = "identitySignature";
             let intervalSpec!: IntervalSpec;
@@ -684,8 +683,7 @@ export function _decode_SignedIntervalSpec(el: asn1.ASN1Element) {
             intervalSpec = _decode_IntervalSpec(sequence[0]);
             signature = _decode_Signature(sequence[1]);
             identitySignature = _decode_IdentitySignature(sequence[2]);
-            // TODO: Validate values.
-            return new SignedIntervalSpec(
+                        return new SignedIntervalSpec(
                 intervalSpec,
                 signature,
                 identitySignature
@@ -1050,15 +1048,13 @@ export function _decode_TSTAndInterval(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "tstInfo";
+                        sequence[0].name = "tstInfo";
             sequence[1].name = "intervalInfo";
             let tstInfo!: TSTInfo;
             let intervalInfo!: IntervalInfo;
             tstInfo = _decode_TSTInfo(sequence[0]);
             intervalInfo = _decode_IntervalInfo(sequence[1]);
-            // TODO: Validate values.
-            return new TSTAndInterval(tstInfo, intervalInfo);
+                        return new TSTAndInterval(tstInfo, intervalInfo);
         };
     }
     return _cached_decoder_for_TSTAndInterval(el);

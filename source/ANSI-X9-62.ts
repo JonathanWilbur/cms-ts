@@ -200,8 +200,7 @@ export function _decode_Pentanomial(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "k1";
+                        sequence[0].name = "k1";
             sequence[1].name = "k2";
             sequence[2].name = "k3";
             let k1!: asn1.INTEGER;
@@ -210,8 +209,7 @@ export function _decode_Pentanomial(el: asn1.ASN1Element) {
             k1 = __utils._decodeInteger(sequence[0]);
             k2 = __utils._decodeInteger(sequence[1]);
             k3 = __utils._decodeInteger(sequence[2]);
-            // TODO: Validate values.
-            return new Pentanomial(k1, k2, k3);
+                        return new Pentanomial(k1, k2, k3);
         };
     }
     return _cached_decoder_for_Pentanomial(el);
@@ -306,8 +304,7 @@ export function _decode_Characteristic_two(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "m";
+                        sequence[0].name = "m";
             sequence[1].name = "basis";
             sequence[2].name = "parameters";
             let m!: asn1.INTEGER;
@@ -316,8 +313,7 @@ export function _decode_Characteristic_two(el: asn1.ASN1Element) {
             m = __utils._decodeInteger(sequence[0]);
             basis = __utils._decodeObjectIdentifier(sequence[1]);
             parameters = __utils._decodeAny(sequence[2]);
-            // TODO: Validate values.
-            return new Characteristic_two(m, basis, parameters);
+                        return new Characteristic_two(m, basis, parameters);
         };
     }
     return _cached_decoder_for_Characteristic_two(el);
@@ -545,15 +541,13 @@ export function _decode_ECDSA_Sig_Value(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "r";
+                        sequence[0].name = "r";
             sequence[1].name = "s";
             let r!: asn1.INTEGER;
             let s!: asn1.INTEGER;
             r = __utils._decodeInteger(sequence[0]);
             s = __utils._decodeInteger(sequence[1]);
-            // TODO: Validate values.
-            return new ECDSA_Sig_Value(r, s);
+                        return new ECDSA_Sig_Value(r, s);
         };
     }
     return _cached_decoder_for_ECDSA_Sig_Value(el);
@@ -715,15 +709,13 @@ export function _decode_FieldID(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "fieldType";
+                        sequence[0].name = "fieldType";
             sequence[1].name = "parameters";
             let fieldType!: asn1.OBJECT_IDENTIFIER;
             let parameters!: asn1.ASN1Element;
             fieldType = __utils._decodeObjectIdentifier(sequence[0]);
             parameters = __utils._decodeAny(sequence[1]);
-            // TODO: Validate values.
-            return new FieldID(fieldType, parameters);
+                        return new FieldID(fieldType, parameters);
         };
     }
     return _cached_decoder_for_FieldID(el);
@@ -1350,15 +1342,13 @@ export function _decode_ECPKRestrictions(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "ecDomain";
+                        sequence[0].name = "ecDomain";
             sequence[1].name = "eccAlgorithms";
             let ecDomain!: ECDomainParameters;
             let eccAlgorithms!: ECCAlgorithms;
             ecDomain = _decode_ECDomainParameters(sequence[0]);
             eccAlgorithms = _decode_ECCAlgorithms(sequence[1]);
-            // TODO: Validate values.
-            return new ECPKRestrictions(ecDomain, eccAlgorithms);
+                        return new ECPKRestrictions(ecDomain, eccAlgorithms);
         };
     }
     return _cached_decoder_for_ECPKRestrictions(el);
@@ -1464,15 +1454,13 @@ export function _decode_SubjectPublicKeyInfo(el: asn1.ASN1Element) {
                         " elements."
                 );
             }
-            // TODO: Validate tags.
-            sequence[0].name = "algorithm";
+                        sequence[0].name = "algorithm";
             sequence[1].name = "subjectPublicKey";
             let algorithm!: ECPKAlgorithm;
             let subjectPublicKey!: asn1.BIT_STRING;
             algorithm = _decode_ECPKAlgorithm(sequence[0]);
             subjectPublicKey = __utils._decodeBitString(sequence[1]);
-            // TODO: Validate values.
-            return new SubjectPublicKeyInfo(algorithm, subjectPublicKey);
+                        return new SubjectPublicKeyInfo(algorithm, subjectPublicKey);
         };
     }
     return _cached_decoder_for_SubjectPublicKeyInfo(el);
