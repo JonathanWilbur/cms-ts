@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { ASN1Element as _Element, ASN1TagClass as _TagClass } from "asn1-ts";
+import { ASN1Element as _Element, ASN1TagClass as _TagClass, OPTIONAL } from "asn1-ts";
 import * as $ from "asn1-ts/dist/node/functional";
 import {
     CMSVersion,
@@ -11,28 +11,11 @@ import {
     _decode_EncryptedContentInfo,
     _encode_EncryptedContentInfo,
 } from "../CryptographicMessageSyntax-2010/EncryptedContentInfo.ta";
-export {
-    CMSVersion,
-    CMSVersion_v0 /* IMPORTED_LONG_NAMED_INTEGER */,
-    CMSVersion_v1 /* IMPORTED_LONG_NAMED_INTEGER */,
-    CMSVersion_v2 /* IMPORTED_LONG_NAMED_INTEGER */,
-    CMSVersion_v3 /* IMPORTED_LONG_NAMED_INTEGER */,
-    CMSVersion_v4 /* IMPORTED_LONG_NAMED_INTEGER */,
-    CMSVersion_v5 /* IMPORTED_LONG_NAMED_INTEGER */,
-    v0 /* IMPORTED_SHORT_NAMED_INTEGER */,
-    v1 /* IMPORTED_SHORT_NAMED_INTEGER */,
-    v2 /* IMPORTED_SHORT_NAMED_INTEGER */,
-    v3 /* IMPORTED_SHORT_NAMED_INTEGER */,
-    v4 /* IMPORTED_SHORT_NAMED_INTEGER */,
-    v5 /* IMPORTED_SHORT_NAMED_INTEGER */,
-    _decode_CMSVersion,
-    _encode_CMSVersion,
-} from "../CryptographicMessageSyntax-2010/CMSVersion.ta";
-export {
-    EncryptedContentInfo,
-    _decode_EncryptedContentInfo,
-    _encode_EncryptedContentInfo,
-} from "../CryptographicMessageSyntax-2010/EncryptedContentInfo.ta";
+import {
+    Attributes,
+    _encode_Attributes,
+    _decode_Attributes,
+} from "../CryptographicMessageSyntax-2010/Attributes.ta";
 
 /* START_OF_SYMBOL_DEFINITION EncryptedData */
 /**
@@ -67,6 +50,12 @@ export class EncryptedData {
          */
         readonly encryptedContentInfo: EncryptedContentInfo,
         /**
+         * @summary `unprotectedAttrs`.
+         * @public
+         * @readonly
+         */
+        readonly unprotectedAttrs: OPTIONAL<Attributes>,
+        /**
          * @summary Extensions that are not recognized.
          * @public
          * @readonly
@@ -92,6 +81,7 @@ export class EncryptedData {
         return new EncryptedData(
             _o.version,
             _o.encryptedContentInfo,
+            _o.unprotectedAttrs,
             _o._unrecognizedExtensionsList
         );
     }
@@ -146,7 +136,15 @@ export const _root_component_type_list_2_spec_for_EncryptedData: $.ComponentSpec
  *
  * @constant
  */
-export const _extension_additions_list_spec_for_EncryptedData: $.ComponentSpec[] = [];
+export const _extension_additions_list_spec_for_EncryptedData: $.ComponentSpec[] = [
+    new $.ComponentSpec(
+        "unprotectedAttrs",
+        true,
+        $.hasTag(_TagClass.context, 1),
+        0,
+        2,
+    ),
+];
 /* END_OF_SYMBOL_DEFINITION _extension_additions_list_spec_for_EncryptedData */
 
 /* START_OF_SYMBOL_DEFINITION _cached_decoder_for_EncryptedData */
@@ -168,6 +166,7 @@ export function _decode_EncryptedData(el: _Element) {
             /* START_OF_SEQUENCE_COMPONENT_DECLARATIONS */
             let version!: CMSVersion;
             let encryptedContentInfo!: EncryptedContentInfo;
+            let unprotectedAttrs: OPTIONAL<Attributes>;
             let _unrecognizedExtensionsList: _Element[] = [];
             /* END_OF_SEQUENCE_COMPONENT_DECLARATIONS */
             /* START_OF_CALLBACKS_MAP */
@@ -177,6 +176,11 @@ export function _decode_EncryptedData(el: _Element) {
                 },
                 encryptedContentInfo: (_el: _Element): void => {
                     encryptedContentInfo = _decode_EncryptedContentInfo(_el);
+                },
+                unprotectedAttrs: (_el: _Element): void => {
+                    unprotectedAttrs = $._decode_implicit<Attributes>(
+                        () => _decode_Attributes,
+                    )(_el);
                 },
             };
             /* END_OF_CALLBACKS_MAP */
@@ -193,6 +197,7 @@ export function _decode_EncryptedData(el: _Element) {
             return new EncryptedData /* SEQUENCE_CONSTRUCTOR_CALL */(
                 version,
                 encryptedContentInfo,
+                unprotectedAttrs,
                 _unrecognizedExtensionsList
             );
         };
@@ -234,6 +239,16 @@ export function _encode_EncryptedData(
                                 value.encryptedContentInfo,
                                 $.BER
                             ),
+                        ],
+                        [
+                            /* IF_ABSENT  */ ((value.unprotectedAttrs === undefined)
+                                ? undefined
+                                : $._encode_implicit(
+                                    _TagClass.context,
+                                    1,
+                                    () => _encode_Attributes,
+                                    $.BER,
+                                ))(value.unprotectedAttrs, $.BER),
                         ],
                         value._unrecognizedExtensionsList
                             ? value._unrecognizedExtensionsList

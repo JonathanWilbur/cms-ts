@@ -25,6 +25,11 @@ import {
     _decode_RecipientInfos,
     _encode_RecipientInfos,
 } from "../CryptographicMessageSyntax-2010/RecipientInfos.ta";
+import {
+    Attributes,
+    _encode_Attributes,
+    _decode_Attributes,
+} from "../CryptographicMessageSyntax-2010/Attributes.ta";
 export {
     CMSVersion,
     CMSVersion_v0 /* IMPORTED_LONG_NAMED_INTEGER */,
@@ -105,6 +110,12 @@ export class EnvelopedData {
          */
         readonly encryptedContentInfo: EncryptedContentInfo,
         /**
+         * @summary `unprotectedAttrs`.
+         * @public
+         * @readonly
+         */
+        readonly unprotectedAttrs: OPTIONAL<Attributes>,
+        /**
          * @summary Extensions that are not recognized.
          * @public
          * @readonly
@@ -132,6 +143,7 @@ export class EnvelopedData {
             _o.originatorInfo,
             _o.recipientInfos,
             _o.encryptedContentInfo,
+            _o.unprotectedAttrs,
             _o._unrecognizedExtensionsList
         );
     }
@@ -200,7 +212,15 @@ export const _root_component_type_list_2_spec_for_EnvelopedData: $.ComponentSpec
  *
  * @constant
  */
-export const _extension_additions_list_spec_for_EnvelopedData: $.ComponentSpec[] = [];
+export const _extension_additions_list_spec_for_EnvelopedData: $.ComponentSpec[] = [
+    new $.ComponentSpec(
+        "unprotectedAttrs",
+        true,
+        $.hasTag(_TagClass.context, 1),
+        0,
+        2,
+    ),
+];
 /* END_OF_SYMBOL_DEFINITION _extension_additions_list_spec_for_EnvelopedData */
 
 /* START_OF_SYMBOL_DEFINITION _cached_decoder_for_EnvelopedData */
@@ -224,6 +244,7 @@ export function _decode_EnvelopedData(el: _Element) {
             let originatorInfo: OPTIONAL<OriginatorInfo>;
             let recipientInfos!: RecipientInfos;
             let encryptedContentInfo!: EncryptedContentInfo;
+            let unprotectedAttrs: OPTIONAL<Attributes>;
             let _unrecognizedExtensionsList: _Element[] = [];
             /* END_OF_SEQUENCE_COMPONENT_DECLARATIONS */
             /* START_OF_CALLBACKS_MAP */
@@ -242,6 +263,11 @@ export function _decode_EnvelopedData(el: _Element) {
                 encryptedContentInfo: (_el: _Element): void => {
                     encryptedContentInfo = _decode_EncryptedContentInfo(_el);
                 },
+                unprotectedAttrs: (_el: _Element): void => {
+                    unprotectedAttrs = $._decode_implicit<Attributes>(
+                        () => _decode_Attributes,
+                    )(_el);
+                },
             };
             /* END_OF_CALLBACKS_MAP */
             $._parse_sequence(
@@ -259,6 +285,7 @@ export function _decode_EnvelopedData(el: _Element) {
                 originatorInfo,
                 recipientInfos,
                 encryptedContentInfo,
+                unprotectedAttrs,
                 _unrecognizedExtensionsList
             );
         };
@@ -312,6 +339,16 @@ export function _encode_EnvelopedData(
                                 value.encryptedContentInfo,
                                 $.BER
                             ),
+                        ],
+                        [
+                            /* IF_ABSENT  */ ((value.unprotectedAttrs === undefined)
+                                ? undefined
+                                : $._encode_implicit(
+                                    _TagClass.context,
+                                    1,
+                                    () => _encode_Attributes,
+                                    $.BER,
+                                ))(value.unprotectedAttrs, $.BER),
                         ],
                         value._unrecognizedExtensionsList
                             ? value._unrecognizedExtensionsList
