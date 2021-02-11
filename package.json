@@ -56,11 +56,11 @@
         "test": "npx jest --ci --reporters=default --reporters=jest-junit --coverage"
     },
     "types": "./dist/node/index.d.ts",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "dependencies": {
         "ansi-x9-42": "^1.0.4",
-        "ansi-x9-62": "^1.0.6",
+        "ansi-x9-62": "^1.0.7",
         "asn1-ts": "^5.0.3",
-        "x500-ts": "^3.2.7"
+        "x500-ts": "^3.2.8"
     }
 }

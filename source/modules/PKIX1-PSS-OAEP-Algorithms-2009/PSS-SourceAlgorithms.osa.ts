@@ -1,12 +1,23 @@
 /* eslint-disable */
 import { ALGORITHM } from "x500-ts/dist/node/modules/AuthenticationFramework/ALGORITHM.oca";
-export { ALGORITHM } from "../AlgorithmInformation-2009/ALGORITHM.oca";
-export {
+import {
     EncodingParameters,
     _decode_EncodingParameters,
     _encode_EncodingParameters,
 } from "../PKIX1-PSS-OAEP-Algorithms-2009/EncodingParameters.ta";
-export { id_pSpecified } from "../PKIX1-PSS-OAEP-Algorithms-2009/id-pSpecified.va";
+import { id_pSpecified } from "../PKIX1-PSS-OAEP-Algorithms-2009/id-pSpecified.va";
+
+const PSS_SourceAlgorithms_0: ALGORITHM<EncodingParameters> = {
+    class: "ALGORITHM",
+    decoderFor: {
+        "&Type": _decode_EncodingParameters,
+    },
+    encoderFor: {
+        "&Type": _encode_EncodingParameters,
+    },
+    "&id": id_pSpecified,
+    "&Type": 0 as never,
+};
 
 /* START_OF_SYMBOL_DEFINITION PSS_SourceAlgorithms */
 /**
@@ -28,7 +39,7 @@ export { id_pSpecified } from "../PKIX1-PSS-OAEP-Algorithms-2009/id-pSpecified.v
  *
  */
 export const PSS_SourceAlgorithms: ALGORITHM[] = [
-    ,/* FIXME: COULD_NOT_COMPILE_DEFINED_SYNTAX_IN_OBJECT_SET */
+    PSS_SourceAlgorithms_0,
 ];
 /* END_OF_SYMBOL_DEFINITION PSS_SourceAlgorithms */
 

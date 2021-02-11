@@ -1,12 +1,23 @@
 /* eslint-disable */
 import { ALGORITHM } from "x500-ts/dist/node/modules/AuthenticationFramework/ALGORITHM.oca";
-export { ALGORITHM } from "../AlgorithmInformation-2009/ALGORITHM.oca";
-export {
+import {
     HashAlgorithm,
     _decode_HashAlgorithm,
     _encode_HashAlgorithm,
 } from "../PKIX1-PSS-OAEP-Algorithms-2009/HashAlgorithm.ta";
-export { id_mgf1 } from "../PKIX1-PSS-OAEP-Algorithms-2009/id-mgf1.va";
+import { id_mgf1 } from "../PKIX1-PSS-OAEP-Algorithms-2009/id-mgf1.va";
+
+const PKCS1MGFAlgorithms_0: ALGORITHM<HashAlgorithm> = {
+    class: "ALGORITHM",
+    decoderFor: {
+        "&Type": _decode_HashAlgorithm,
+    },
+    encoderFor: {
+        "&Type": _encode_HashAlgorithm,
+    },
+    "&id": id_mgf1,
+    "&Type": 0 as never,
+};
 
 /* START_OF_SYMBOL_DEFINITION PKCS1MGFAlgorithms */
 /**
@@ -27,7 +38,7 @@ export { id_mgf1 } from "../PKIX1-PSS-OAEP-Algorithms-2009/id-mgf1.va";
  *
  */
 export const PKCS1MGFAlgorithms: ALGORITHM[] = [
-    ,/* FIXME: COULD_NOT_COMPILE_DEFINED_SYNTAX_IN_OBJECT_SET */
+    PKCS1MGFAlgorithms_0,
 ];
 /* END_OF_SYMBOL_DEFINITION PKCS1MGFAlgorithms */
 
